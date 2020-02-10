@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2020_02_10_165328) do
   end
 
   create_table "sensors", force: :cascade do |t|
-    t.bigint "study_area_id"
     t.string "sensor_type"
     t.string "location"
     t.string "ownership"
@@ -31,9 +30,9 @@ ActiveRecord::Schema.define(version: 2020_02_10_165328) do
     t.string "op_hrs"
     t.string "datatype"
     t.string "description"
+    t.integer "study_area_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["study_area_id"], name: "index_sensors_on_study_area_id"
   end
 
   create_table "study_areas", force: :cascade do |t|
