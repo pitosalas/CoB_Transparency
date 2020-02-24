@@ -56,7 +56,12 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'better_errors'
-gem 'faker'
 gem 'pry-byebug'
 gem 'hirb'
 gem 'rails_admin'
+gem 'bcrypt',     '3.1.13'
+
+# for seed.rb file
+gem 'faker'
+gem 'random-location'
+gem 'random-password'
