@@ -46,8 +46,23 @@
               }).addTo(map);
             
               var neighborhoodBorder = L.geoJSON(neighborhoods.responseJSON).addTo(map);
+              var marker = L.marker([42.33, -71.06]).addTo(map);
+              var marker1 = L.marker([42.34, -71.07]).addTo(map);
+              var marker2 = L.marker([42.35, -71.08]).addTo(map);
+              var marker3 = L.marker([42.36, -71.09]).addTo(map);
+              var markers = new Array(marker1, marker2, marker3);
+
+              <% @sensors.each do |sensor| %>
+                <% location = sensor.location.split(","); %>
+                <% location.each do |c| %>
+                    <% c = c.to_f %>
+                <% end %>
+                marker_tmp = L.marker(<% location %>).addTo(map);
+                markers.push(marker_tmp);
+             <% end %>
             });
     </script>
+    
 </body>
 
 </html>
