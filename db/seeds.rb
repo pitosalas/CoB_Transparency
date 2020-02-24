@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+StudyArea.create!(
+    start_point: [42.358543, -71.063712]
+    end_point: [42.352233, -71.053798]
+    num_sensors: 7
+    name: "what_ever"
+)

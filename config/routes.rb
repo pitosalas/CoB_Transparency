@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'home#home'
+  get 'home/home'
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   resources :administrators
   resources :study_areas
