@@ -65,3 +65,5 @@ gem 'bcrypt',     '3.1.13'
 gem 'faker'
 gem 'random-location'
 gem 'random-password'
+
+gem 'gem-open'
