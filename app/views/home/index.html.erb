@@ -2,62 +2,73 @@
 <html>
 
 <head>
-    <title>A simple map</title>
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
-
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #mapid {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-    </style>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
-    <div id="mapid"></div>
+    # Geocoder Api
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+    type="text/css"/>
 
+    # Promise polyfill script required to use Mapbox GL Geocoder in IE 11 
+    
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    
+
+
+
+    <div id='map' style='position: absolute; top: 0; bottom: 0; width: 100%; height: 100%;'></div>
     <script>
-            
-            
-            var map = L.map("mapid")
-                .setView([42.33, -71.06], 12 );
+        mapboxgl.accessToken = 'pk.eyJ1Ijoibm9zc3UzNzUxIiwiYSI6ImNrNzRxbHo3bzA4MW4zZm8zdmxpZ294MzEifQ.HcBzxOgPOrQHFhplZ0FuXQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/nossu3751/ck757utxk36gn1io7vjmmmrnh/draft',
+            center: [-71.057991, 42.360405],
+            zoom: 16,
+            minZoom: 15,
+            maxZoom: 20
+        });
 
-                L.tileLayer('http://tiles.mapc.org/basemap/{z}/{x}/{y}.png', {
-                    attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
-                    maxZoom: 18,
-                    minZoom: 12,
-                }).addTo(map);
-              
+        var marker = [];
+        var popup = [];
     </script>
-        
+
     <% @sensors.each do |sensor| %>
         <% locary = [] %>
         <% location = sensor.location.split(","); %>
+        <% ownership = sensor.ownership %>
         <% location.each do |c| %>
             <% print locary %>
             <% locary.push(c.to_f) %>
         <% end %>
         <script>
-            var latlng = L.latLng(<%= locary[0] %>,<%= locary[1] %>);
-            marker_tmp = L.marker(latlng).addTo(map);
+            popup = new mapboxgl.Popup({offset:25}).setText(
+                "ownership: " + <%= sensor.location %> 
+            );
+
+            marker_tmp = new mapboxgl.Marker(
+                
+            ).setLngLat([<%= locary[1] %>,<%= locary[0] %>]).setPopup(popup).addTo(map);
+            marker.push(marker_tmp);
         </script>
-     <% end %>
+    <% end %>
+
+    <script>
+    map.addControl(
+        new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+        })
+    );
+    </script>
+
+
     
 </body>
 
