@@ -7,7 +7,6 @@
 </head>
 
 <body>
-    # Geocoder Api
     
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
     <link
@@ -15,7 +14,7 @@
     href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
     type="text/css"/>
 
-    # Promise polyfill script required to use Mapbox GL Geocoder in IE 11 
+    
     
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
@@ -26,38 +25,55 @@
     <div id='map' style='position: absolute; top: 0; bottom: 0; width: 100%; height: 100%;'></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1Ijoibm9zc3UzNzUxIiwiYSI6ImNrNzRxbHo3bzA4MW4zZm8zdmxpZ294MzEifQ.HcBzxOgPOrQHFhplZ0FuXQ';
+
+
+        var sen = <%= raw render template: "sensors/index.json.jbuilder" %>
+
+        var filterGroup = document.getElementById('filter-group');
+        
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/nossu3751/ck757utxk36gn1io7vjmmmrnh/draft',
             center: [-71.057991, 42.360405],
-            zoom: 16,
-            minZoom: 15,
+            zoom: 11,
+            minZoom: 11,
             maxZoom: 20
         });
 
-        var marker = [];
-        var popup = [];
+        map.on('load', function() {
+            map.addSource('sensor_loc', {
+                type: 'geojson',
+                data: sen
+            });
+            map.addLayer({
+                'id': 'sensor_loc',
+                'type': 'symbol',
+                'source': 'sensor_loc',
+            });
+
+            sen.features.forEach(function(marker) {
+
+  
+                var el = document.createElement('div');
+                el.className = 'marker';
+
+  
+                new mapboxgl.Marker(el)
+                    .setLngLat(marker.geometry.coordinates)
+                    .addTo(map);
+            });
+
+
+
+
+        });
+
+        
+    
+        
+        
     </script>
 
-    <% @sensors.each do |sensor| %>
-        <% locary = [] %>
-        <% location = sensor.location.split(","); %>
-        <% ownership = sensor.ownership %>
-        <% location.each do |c| %>
-            <% print locary %>
-            <% locary.push(c.to_f) %>
-        <% end %>
-        <script>
-            popup = new mapboxgl.Popup({offset:25}).setText(
-                "ownership: " + <%= sensor.location %> 
-            );
-
-            marker_tmp = new mapboxgl.Marker(
-                
-            ).setLngLat([<%= locary[1] %>,<%= locary[0] %>]).setPopup(popup).addTo(map);
-            marker.push(marker_tmp);
-        </script>
-    <% end %>
     
     
     
@@ -145,17 +161,8 @@
     console.log(geocoder.query("Boston"));
     </script>
 
-    <script>
-        function rtnCoordinate(str){
-            var matches = str.match(
-                /^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
-            );
-            if (!matches) {
-                return geocoder.query(str).options.proximity;
-            }
-            return geocoder.query(coordinatesGeocoder(str)[0].place_name).options.proximity
-        }
-    </script>
+
+
 
     
 </body>
