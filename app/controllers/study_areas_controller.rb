@@ -5,6 +5,7 @@ class StudyAreasController < ApplicationController
   # GET /study_areas.json
   def index
     @study_areas = StudyArea.all
+    @neighborhoods = 'https://gist.githubusercontent.com/nossu3751/3a92073b0333314e360185906d56772f/raw/3e86f1b621080aa431593b334114d4c0f9479b71/neighborhoods.geojson'
   end
 
   # GET /study_areas/1
