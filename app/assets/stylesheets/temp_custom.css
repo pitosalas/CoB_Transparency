@@ -1,0 +1,22 @@
+/*
+This file contains style guidelines for CoB. 
+*/
+
+/*
+primary colors: 
+Charles blue;  #091F2F Use our dark blue for typographic headers, and as way to add contrast and weight to lighter pages. Use this color when you need something to look more official.
+Optimistic blue; #288BE4 Use this blue for normal links and buttons, and occasionally as a background color. You should also use this color for the overlays on photography. Use this color when you need to inject warmth into a layout (and can be a little less official). Don’t use this color on top of Freedom Trail Red.
+Freedom trail red; #FB4D42 A brick-red, inspired by the Freedom Trail. Use this color to draw attention to something on the page, or for important links and buttons. Never use Optimistic Blue on top of Freedom Trail Red (and vise versa). They are too bright and vibrate when used on top of each other.
+
+secondary colors: 
+supporting blues; #061622, #0C2639, #45789C, #51ACFF   (in order darkest to lightest)
+The darkest of these should be used very rarely – when you need something that resembles black. The next darkest-blue is used for our footer background color, so that it can bump up against our primary dark blue without issue. The desaturated blue can be used when you need text to visually recede. The brightest blue is used as a substitute for our primary bright blue when it needs to appear on a dark background.
+
+supporting greys: #58585B, #D2D2D2, #E0E0E0, #F2F2F2  (in order darkest to lightest)
+The darkest grey is used for the body copy, and the lightest grey is used as a background color. The two medium greys can be used for a variety of things, like horizontal rules and miscellaneous borders.
+
+font: 
+Montserrat: (headers) Use it small for navigation, links, and buttons, and use it large for primary headers. Always use it in UPPERCASE bold.
+Lora: (body) Use it small for body text, or large and italic for quotes or other special secondary text.
+*/
+
