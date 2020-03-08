@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: "cam_201"
+  location: "40.741895,-73.989308"
+  sensor_type: "camera"
+
+two:
+  description: "counter_102"
+  location: "40.741895,-73.989308"
+  sensor_type: "counter"
