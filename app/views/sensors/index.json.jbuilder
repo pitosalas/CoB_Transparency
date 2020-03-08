@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-json.array! @sensors, partial: "sensors/sensor", as: :sensor
-=======
 json.type "FeatureCollection"
 json.features @sensors.each do |sensor|
     json.type "Feature"
@@ -22,4 +19,3 @@ json.features @sensors.each do |sensor|
         json.set! :study_area_id, sensor.study_area_id
     end
 end
->>>>>>> b9009b888464144e8f4b574860bb051d61f14fe3
