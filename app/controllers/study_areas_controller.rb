@@ -6,6 +6,7 @@ class StudyAreasController < ApplicationController
   def index
     @study_areas = StudyArea.all
     @neighborhoods = 'https://gist.githubusercontent.com/nossu3751/3a92073b0333314e360185906d56772f/raw/3e86f1b621080aa431593b334114d4c0f9479b71/neighborhoods.geojson'
+    @layerInfo = layerInfoBuilder
   end
 
   # GET /study_areas/1
@@ -72,4 +73,14 @@ class StudyAreasController < ApplicationController
     def study_area_params
       params.require(:study_area).permit(:location)
     end
+
+    def layerInfoBuilder
+      layers = [
+          {"layerID" => "sensor_loc", "layerName" => "Clusters"},
+          {"layerID" => "unclustered-point", "layerName" => "Sensors"},
+          {"layerID" => "sensor_loc_count", "layerName" => "# of Sensors"},
+          {"layerID" => "neighborhood_fill", "layerName" => "Boston Neighborhoods"},
+          {"layerID" => "neighborhood_line", "layerName" => "Neighborhood Boundaries"}
+      ]   
+  end
 end

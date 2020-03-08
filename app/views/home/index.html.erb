@@ -30,8 +30,8 @@
     <script>
         mapboxgl.accessToken = 'pk.eyJ1Ijoibm9zc3UzNzUxIiwiYSI6ImNrNzRxbHo3bzA4MW4zZm8zdmxpZ294MzEifQ.HcBzxOgPOrQHFhplZ0FuXQ';
 
-
         var sen = <%= raw render template: "sensors/index.json.jbuilder" %>
+        var layerInfo = <%= raw render template: "home/index.json.jbuilder" %>
         var neighborhood = 'https://gist.githubusercontent.com/nossu3751/3a92073b0333314e360185906d56772f/raw/3e86f1b621080aa431593b334114d4c0f9479b71/neighborhoods.geojson'
 
         var layer_ids = ["sensor_loc", "unclustered-point", "sensor_loc_count", "neighborhood_fill", "neighborhood_line"]
@@ -135,21 +135,21 @@
 
 
 
-            layer_ids.forEach(function(li){
+            layerInfo.layers.forEach(function(li){
                 var input = document.createElement('input');
                 input.type = 'checkbox';
-                input.id = li;
+                input.id = li.layerID;
                 input.checked = true;
                 filterGroup.appendChild(input);
 
                 var label = document.createElement('label');
-                label.setAttribute('for', li);
-                label.textContent = li;
+                label.setAttribute('for', li.layerID);
+                label.textContent = li.layerName;
                 filterGroup.appendChild(label);
 
                 input.addEventListener('change', function(e) {
                     map.setLayoutProperty(
-                        li,
+                        li.layerID,
                         'visibility',
                         e.target.checked ? 'visible' : 'none'
                     );
