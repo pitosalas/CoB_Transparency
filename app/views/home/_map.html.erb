@@ -20,7 +20,7 @@
 
 
 
-    <div id='map' style='position: absolute; top: 6.5%; bottom: 0; width: 100%; height: 70%;'></div>
+    <div id='map'></div>
     <nav id="filter-group" class="filter-group"></nav>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1Ijoibm9zc3UzNzUxIiwiYSI6ImNrNzRxbHo3bzA4MW4zZm8zdmxpZ294MzEifQ.HcBzxOgPOrQHFhplZ0FuXQ';
@@ -92,9 +92,8 @@
                 filter: ['!', ['has', 'point_count']],
                 paint: {
                     'circle-color': '#11b4da',
-                    'circle-radius': 50,
-                    'circle-stroke-width': 1,
-                    'circle-stroke-color': '#fff'
+                    'circle-radius': 20,
+                    
                 }
             });
             map.addLayer({
@@ -128,6 +127,41 @@
                 }
             });
 
+            map.on('click', 'neighborhood_fill', function(e) {
+                new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(e.features[0].properties.Name)
+                .addTo(map);
+            });
+            
+            map.on('mouseenter', 'neighborhood_fill', function() {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+            
+            map.on('mouseleave', 'neighborhood_fill', function() {
+                map.getCanvas().style.cursor = '';
+            });
+
+
+            map.on('click', 'unclustered-point', function(e) {
+                var popUpMsg = ""
+                new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setText(popUpMsg.concat(
+                    e.lngLat,
+                    e.features[0].properties.ownership,
+                    e.features[0].properties.sensor_type,
+                ))
+                .addTo(map);
+            });
+            
+            map.on('mouseenter', 'unclustered-point', function() {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+            
+            map.on('mouseleave', 'unclustered-point', function() {
+                map.getCanvas().style.cursor = '';
+            });
 
 
             layerInfo.layers.forEach(function(li){

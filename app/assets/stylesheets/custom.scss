@@ -12,7 +12,14 @@ $gray-medium-light: #eaeaea;
   }
 
 /* universal */
-
+.infoContainer{
+  background-color: grey;
+  position: absolute;
+  bottom: 0;
+  padding-top:50px;
+  height: 25%;
+  width: 100%;
+}
 body {
   padding-top: 60px;
 }
@@ -80,8 +87,11 @@ p {
 /* footer */
 
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  
   border-top: 1px solid $gray-medium-light;
   color: $gray-light;
   a {
