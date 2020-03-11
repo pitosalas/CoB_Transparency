@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :points
   get 'sessions/new'
   get 'administrators/new'
   root 'administrator_pages#home'
