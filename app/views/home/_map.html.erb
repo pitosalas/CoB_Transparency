@@ -131,7 +131,6 @@
                 var holo=e.features[0];
                 $.ajax({
                     success: function() {
-                        var neighborhood=holo.geometry.coordinates;                    
                         $('#sensorInfo').html('')
                         $('#neighborhoodInfo').html("Neighborhood Name: "+holo.properties.Name);
                     }
