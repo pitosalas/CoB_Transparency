@@ -128,10 +128,13 @@
             });
 
             map.on('click', 'neighborhood_fill', function(e) {
-                new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(e.features[0].properties.Name)
-                .addTo(map);
+                var holo=e.features[0];
+                $.ajax({
+                    success: function() {
+                        $('#neightborhooldInfo').html("Neighborhood Name: "+holo.properties.Name);
+                        $('#sensorInfo').html('')
+                    }
+                })
             });
             
             map.on('mouseenter', 'neighborhood_fill', function() {
@@ -142,19 +145,17 @@
                 map.getCanvas().style.cursor = '';
             });
 
-
             map.on('click', 'unclustered-point', function(e) {
-                var popUpMsg = ""
-                new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setText(popUpMsg.concat(
-                    e.lngLat,
-                    e.features[0].properties.ownership,
-                    e.features[0].properties.sensor_type,
-                ))
-                .addTo(map);
+                var holo=e.features[0];
+                $.ajax({
+                success: function() {
+                    $('#neightborhooldInfo').html('');
+                    $('#sensorInfo').html(e.lngLat+"Ownership: "+ holo.properties.ownership+"Sensor Type: "+holo.properties.sensor_type)
+                }
+            })
             });
-            
+
+
             map.on('mouseenter', 'unclustered-point', function() {
                 map.getCanvas().style.cursor = 'pointer';
             });
@@ -282,3 +283,4 @@
 
 
 </div>
+
