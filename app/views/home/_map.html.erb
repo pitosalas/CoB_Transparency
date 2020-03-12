@@ -131,8 +131,9 @@
                 var holo=e.features[0];
                 $.ajax({
                     success: function() {
-                        $('#neightborhooldInfo').html("Neighborhood Name: "+holo.properties.Name);
+                        var neighborhood=holo.geometry.coordinates;                    
                         $('#sensorInfo').html('')
+                        $('#neighborhoodInfo').html("Neighborhood Name: "+holo.properties.Name, count);
                     }
                 })
             });
@@ -149,8 +150,10 @@
                 var holo=e.features[0];
                 $.ajax({
                 success: function() {
-                    $('#neightborhooldInfo').html('');
-                    $('#sensorInfo').html(e.lngLat+"Ownership: "+ holo.properties.ownership+"Sensor Type: "+holo.properties.sensor_type)
+                    $('#neighborhoodInfo').html('');
+                    $('#sensorInfo').html("<p>"+e.lngLat+
+                    "</p>"+"<p>Ownership: "+ holo.properties.ownership+"</p><p>Sensor Type: "+holo.properties.sensor_type+
+                    "</p><p>Description: "+holo.properties.description+"</p>")
                 }
             })
             });
