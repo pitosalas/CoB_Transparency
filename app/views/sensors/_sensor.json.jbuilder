@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-json.extract! sensor, :id, :type, :created_at, :updated_at
-json.url sensor_url(sensor, format: :json)
-=======
 json.type "FeatureCollection"
 json.features @sensors.each do |sensor|
     json.type "Feature"
@@ -24,4 +20,3 @@ json.features @sensors.each do |sensor|
     end
 end
 
->>>>>>> b9009b888464144e8f4b574860bb051d61f14fe3
