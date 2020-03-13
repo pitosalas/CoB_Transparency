@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(version: 2020_03_10_010437) do
   end
 
   create_table "sensors", force: :cascade do |t|
+    t.integer "sensor_id"
     t.string "sensor_type"
-    t.string "location"
     t.string "ownership"
-    t.boolean "gov_owned"
+    t.string "gov_owned"
     t.string "op_hrs"
     t.string "datatype"
     t.string "description"
@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 2020_03_10_010437) do
   end
 
   create_table "study_areas", force: :cascade do |t|
-    t.string "location"
-    t.float "radius"
-    t.integer "num_sensors"
+    t.integer "study_area_id"
     t.string "name"
+    t.integer "sensor_count"
+    t.integer "point_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

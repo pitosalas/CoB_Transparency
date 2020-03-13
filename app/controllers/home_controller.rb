@@ -5,6 +5,7 @@ class HomeController < ApplicationController
         #@sa = GeoJson.new(@sa.to_points)
         @sensors = Sensor.all
         @study_areas = StudyArea.all
+        @points = Point.all
         @layerInfo = layerInfoBuilder
         render 'home/index'
     end

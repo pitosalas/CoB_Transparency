@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
     
 
-
+    <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
 
 
 
@@ -47,8 +47,8 @@
                 type: 'geojson',
                 data: sen,
                 cluster: true,
-                clusterMaxZoom: 20,
-                clusterRadius: 400
+                clusterMaxZoom: 15,
+                clusterRadius: 50
             });
             map.addSource('neighborhood_loc', {
                 type: 'geojson',
@@ -64,23 +64,35 @@
                         'step',
                         ['get', 'point_count'],
                         '#FEBCFF',
-                        1,
-                        '#51bbd6',
                         5,
-                        '#f1f075',
+                        '#51bbd6',
                         20,
-                        '#f28cb1'
+                        '#f1f075',
+                        50,
+                        '#f28cb1',
+                        80,
+                        '#51bbd6',
+                        120,
+                        '#f1f075',
+                        200,
+                        '#f1f075',
                     ],
                     'circle-radius': [
                         'step',
                         ['get', 'point_count'],
-                        50,
-                        1,
-                        300,
-                        5,
-                        400,
                         20,
-                        500
+                        5,
+                        80,
+                        20,
+                        120,
+                        50,
+                        180,
+                        80,
+                        270,
+                        120,
+                        350,
+                        200,
+                        400
                     ],
                     'circle-opacity': 0.3
                 }    
@@ -92,7 +104,7 @@
                 filter: ['!', ['has', 'point_count']],
                 paint: {
                     'circle-color': '#11b4da',
-                    'circle-radius': 20,
+                    'circle-radius': 7,
                     
                 }
             });
@@ -128,10 +140,22 @@
             });
 
             map.on('click', 'neighborhood_fill', function(e) {
+                var sensorsWithin = []
                 var holo=e.features[0];
+
+                sen.features.forEach(function(s){
+                    if(turf.inside(s,holo)){
+                        sensorsWithin.push(s.properties.sensor_id)
+                    }
+                })
+
                 $.ajax({
                     success: function() {
-                        $('#neightborhooldInfo').html("Neighborhood Name: "+holo.properties.Name);
+                        $('#neighborhoodInfo').html(
+                       
+                            "Neighborhood Name: "+holo.properties.Name+ ", Sensors in the Neighborhood: " +sensorsWithin
+                
+                        );
                         $('#sensorInfo').html('')
                     }
                 })
@@ -149,7 +173,7 @@
                 var holo=e.features[0];
                 $.ajax({
                 success: function() {
-                    $('#neightborhooldInfo').html('');
+                    $('#neighborhoodInfo').html('');
                     $('#sensorInfo').html(e.lngLat+"Ownership: "+ holo.properties.ownership+"Sensor Type: "+holo.properties.sensor_type)
                 }
             })

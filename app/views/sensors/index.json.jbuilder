@@ -1,15 +1,14 @@
 json.type "FeatureCollection"
 json.features @sensors.each do |sensor|
+    p = Point.find_by(identifier: sensor.sensor_id)
     json.type "Feature"
     json.set! :geometry do
         json.set! :type, "Point"
-        loclat = []
-        location = sensor.location.split(",")
-        loclat.push(location[1].to_f)
-        loclat.push(location[0].to_f)
-        json.set! :coordinates, loclat
+        longlat = [p.longitude, p.latitude]
+        json.set! :coordinates, longlat
     end
     json.set! :properties do
+        json.set! :sensor_id, sensor.sensor_id 
         json.set! :sensor_type, sensor.sensor_type
         json.set! :ownership, sensor.ownership
         json.set! :boolean, sensor.gov_owned
