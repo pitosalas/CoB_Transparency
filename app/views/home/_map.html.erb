@@ -153,10 +153,11 @@
                     success: function() {
                         $('#neighborhoodInfo').html(
                        
-                            "Neighborhood Name: "+holo.properties.Name+ ", Sensors in the Neighborhood: " +sensorsWithin
+                            "<p>Neighborhood Name: "+holo.properties.Name+ "</p><p> Sensors in the Neighborhood: " +sensorsWithin + "</p>"
                 
                         );
                         $('#sensorInfo').html('')
+                        
                     }
                 })
             });
@@ -174,7 +175,9 @@
                 $.ajax({
                 success: function() {
                     $('#neighborhoodInfo').html('');
-                    $('#sensorInfo').html(e.lngLat+"Ownership: "+ holo.properties.ownership+"Sensor Type: "+holo.properties.sensor_type)
+                    $('#sensorInfo').html("<p>"+e.lngLat+
+                    "</p>"+"<p>Ownership: "+ holo.properties.ownership+"</p><p>Sensor Type: "+holo.properties.sensor_type+
+                    "</p><p>Description: "+holo.properties.description+"</p>")
                 }
             })
             });
