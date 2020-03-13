@@ -151,6 +151,7 @@
 
                 $.ajax({
                     success: function() {
+                        $('#clickInfo').html('');
                         $('#neighborhoodInfo').html(
                        
                             "<p>Neighborhood Name: "+holo.properties.Name+ "</p><p> Sensors in the Neighborhood: " +sensorsWithin + "</p>"
@@ -174,6 +175,7 @@
                 var holo=e.features[0];
                 $.ajax({
                 success: function() {
+                    $('#clickInfo').html('');
                     $('#neighborhoodInfo').html('');
                     $('#sensorInfo').html("<p>"+e.lngLat+
                     "</p>"+"<p>Ownership: "+ holo.properties.ownership+"</p><p>Sensor Type: "+holo.properties.sensor_type+

@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_03_10_010437) do
   end
 
   create_table "sensors", force: :cascade do |t|
+    t.integer "sensor_id"
     t.string "sensor_type"
     t.string "location"
     t.string "ownership"
