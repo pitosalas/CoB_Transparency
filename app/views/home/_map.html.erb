@@ -334,10 +334,21 @@
         $.ajax({
             success: function(){
                 $('#clickInfo').html('');
-                $('#sensorInfo').html(
-                    "<p>" + geocoder._typeahead.selected.place_name + "<p>" +
-                    "<p>" + geocoder._typeahead.selected.center.toString() + "<p>"
-                )
+                if(geocoder._typeahead.selected.place_type == "sensor"){
+                    $('#sensorInfo').html(
+                        "<p>" + geocoder._typeahead.selected.place_name + "<p>" +
+                        "<p>" + geocoder._typeahead.selected.center.toString() + "<p>" +
+                        "<p>" + geocoder._typeahead.selected.properties.sensor_type + "<p>" +
+                        "<p>" + geocoder._typeahead.selected.properties.ownership + "<p>" +
+                        "<p>" + geocoder._typeahead.selected.properties.datatype + "<p>" 
+                        
+                    )
+                }else{
+                    $('#sensorInfo').html(
+                        "<p>" + geocoder._typeahead.selected.place_name + "<p>" +
+                        "<p>" + geocoder._typeahead.selected.center.toString() + "<p>"
+                    )
+                }
             }
         });
     });
