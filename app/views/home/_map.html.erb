@@ -5,9 +5,9 @@
     
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
     <link
-    rel="stylesheet"
-    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
-    type="text/css"/>
+        rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+        type="text/css"/>
 
     
     
@@ -193,6 +193,8 @@
                 map.getCanvas().style.cursor = '';
             });
 
+            
+
 
             layerInfo.layers.forEach(function(li){
                 var input = document.createElement('input');
@@ -286,7 +288,7 @@
         var matchingFeatures = [];
         for (var i = 0; i < sen.features.length; i++){
             var feature = sen.features[i];
-            if(feature.properties.sensor_id.toString().search(query) !== -1){
+            if(feature.properties.sensor_id.toString().toLowerCase().search(query.toLowerCase()) !== -1){
                 feature['place_name'] = '📷 sensor ' + feature.properties.sensor_id;
                 feature['center'] = feature.geometry.coordinates;
                 feature['place_type'] = ['sensor'];
@@ -323,8 +325,31 @@
     map.addControl(geocoder);
 
     console.log(geocoder.query("Boston"));
-    </script>
 
+    let suggestionList = geocoder.container.offsetParent.children[0].children[2].childNodes[0].children;
+    let suggestionListProperties = geocoder._typeahead.data;
+    let targetLocation = geocoder._typeahead.selected;
+    
+    geocoder._inputEl.addEventListener('change',function(){
+        $.ajax({
+            success: function(){
+                $('#clickInfo').html('');
+                $('#sensorInfo').html(
+                    "<p>" + geocoder._typeahead.selected.place_name + "<p>" +
+                    "<p>" + geocoder._typeahead.selected.center.toString() + "<p>"
+                )
+            }
+        });
+    });
+
+
+
+
+    function fly(coord) {
+        setTimeout(function() { map.flyTo([coord[1], coord[0]], 16) }, 0);
+    };
+
+    </script>
 
 
 
