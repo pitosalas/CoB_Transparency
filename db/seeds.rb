@@ -32,7 +32,7 @@ sensor_csv_path = "./db/sensors.csv"
 #CSV.parse(open(sensor_csv_path), :headers=>true).each do |row|
 CSV.read(sensor_csv_path, :headers=>true).each do |row|
   Sensor.create!(
-    sensor_id: row["sensor_id"].to_i, 
+    sensor_id: row["sensor_id"], 
     sensor_type: row["sensor_type"], 
     ownership: row["ownership"],
     gov_owned: row["gov_owned"], 

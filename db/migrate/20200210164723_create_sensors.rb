@@ -1,7 +1,7 @@
 class CreateSensors < ActiveRecord::Migration[6.0]
   def change
     create_table :sensors do |t|
-      t.integer :sensor_id
+      t.string :sensor_id
       t.string :sensor_type
       t.string :ownership
       t.string :gov_owned

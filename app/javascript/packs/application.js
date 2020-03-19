@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
+require("mapbox/custom_mapbox")
 import "bootstrap"
 
 //= require ../coordinateShow
