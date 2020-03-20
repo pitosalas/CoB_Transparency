@@ -201,6 +201,7 @@
                 map.getCanvas().style.cursor = '';
             });
 
+<<<<<<< HEAD
             $('#exitthis').click(function(){
                 $.ajax({
                     success: function(){
@@ -210,6 +211,9 @@
                 })
                 
             });
+=======
+            
+>>>>>>> 40751b63def7de1e7274cdd67562e30196e72b5e
 
 
             layerInfo.layers.forEach(function(li){
@@ -349,8 +353,11 @@
     geocoder._inputEl.addEventListener('change',function(){
         $.ajax({
             success: function(){
+<<<<<<< HEAD
                 $('.slider').toggleClass('close', infoClosed);
                 infoClosed = false;
+=======
+>>>>>>> 40751b63def7de1e7274cdd67562e30196e72b5e
                 $('#clickInfo').html('');
                 if(geocoder._typeahead.selected.place_type == "sensor"){
                     $('#sensorInfo').html(
