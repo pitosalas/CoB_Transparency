@@ -33,6 +33,7 @@
         var layer_ids = ["sensor_loc", "unclustered-point", "sensor_loc_count", "neighborhood_fill", "neighborhood_line"]
 
         var filterGroup = document.getElementById('filter-group');
+        var infoClosed = true;
 
         var map = new mapboxgl.Map({
             container: 'map',
@@ -139,6 +140,8 @@
                     'line-width': 2
                 }
             });
+            
+            
 
             map.on('click', 'neighborhood_fill', function(e) {
                 var sensorsWithin = []
@@ -152,6 +155,8 @@
 
                 $.ajax({
                     success: function() {
+                        $('.slider').toggleClass('close', infoClosed);
+                        infoClosed = false;
                         $('#clickInfo').html('');
                         $('#neighborhoodInfo').html(
                        
@@ -176,6 +181,8 @@
                 var holo=e.features[0];
                 $.ajax({
                 success: function() {
+                    $('.slider').toggleClass('close', infoClosed);
+                    infoClosed = false;
                     $('#clickInfo').html('');
                     $('#neighborhoodInfo').html('');
                     $('#sensorInfo').html("<p>"+e.lngLat+
@@ -194,7 +201,15 @@
                 map.getCanvas().style.cursor = '';
             });
 
-            
+            $('#exitthis').click(function(){
+                $.ajax({
+                    success: function(){
+                        $('.slider').toggleClass('close');
+                        infoClosed = true;
+                    }
+                })
+                
+            });
 
 
             layerInfo.layers.forEach(function(li){
@@ -334,6 +349,8 @@
     geocoder._inputEl.addEventListener('change',function(){
         $.ajax({
             success: function(){
+                $('.slider').toggleClass('close', infoClosed);
+                infoClosed = false;
                 $('#clickInfo').html('');
                 if(geocoder._typeahead.selected.place_type == "sensor"){
                     $('#sensorInfo').html(

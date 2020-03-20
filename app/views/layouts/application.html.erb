@@ -14,8 +14,15 @@
                                            'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= render 'layouts/shim' %>
+    
   </head>
   <body>
+    <script>
+      $('.trigger, .slider').click(function() {
+        $('.slider').toggleClass('close');
+      });
+    </script>
+  
     <%= render 'layouts/header' %>
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
@@ -23,11 +30,15 @@
       <div class= "map-container">
       <%= yield %>
       </div>
-      <div class="infoContainer">
-        <div id="clickInfo">Click for more information</div>
-        <div id="neighborhoodInfo"></div>
-        <div id="sensorInfo"></div>
-      </div>
+      
+      <div class="slider close">
+          <div id="clickInfo">Click for more information</div>
+          <div id="neighborhoodInfo"></div>
+          <div id="sensorInfo"></div>
+          <button id="exitthis"> Close </button>
+      </div>  
       <%= debug(params) if Rails.env.development? %>
   </body>
+
 </html>
+
