@@ -20,13 +20,13 @@ $gray-medium-light: #eaeaea;
   bottom: 0;
   overflow: hidden;
   background-color: darkgrey; color: black;
-  transition: height 1s;
+  transition: height 0.3s;
 
   
 }
 
 .slider.close {
-  top: 100%;
+  
   height: 0;
 }
 
