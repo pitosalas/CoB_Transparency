@@ -44,13 +44,17 @@
             maxZoom: 20
         });
 
+        map.addControl(new mapboxgl.NavigationControl(), 'top-left');
         map.on('load', function() {
             map.addSource('sensor_loc', {
                 type: 'geojson',
                 data: sen,
-                cluster: true,
-                clusterMaxZoom: 15,
-                clusterRadius: 50
+
+                <% if false %>
+                # cluster: true,
+                # clusterMaxZoom: 15,
+                # clusterRadius: 50
+                <% end %>
             });
             map.addSource('neighborhood_loc', {
                 type: 'geojson',
@@ -103,7 +107,7 @@
                 id: 'unclustered-point',
                 type: 'circle',
                 source: 'sensor_loc',
-                filter: ['!', ['has', 'point_count']],
+            
                 paint: {
                     'circle-color': '#11b4da',
                     'circle-radius': 7,
@@ -201,7 +205,6 @@
                 map.getCanvas().style.cursor = '';
             });
 
-<<<<<<< HEAD
             $('#exitthis').click(function(){
                 $.ajax({
                     success: function(){
@@ -211,9 +214,6 @@
                 })
                 
             });
-=======
-            
->>>>>>> 40751b63def7de1e7274cdd67562e30196e72b5e
 
 
             layerInfo.layers.forEach(function(li){
@@ -353,11 +353,8 @@
     geocoder._inputEl.addEventListener('change',function(){
         $.ajax({
             success: function(){
-<<<<<<< HEAD
                 $('.slider').toggleClass('close', infoClosed);
                 infoClosed = false;
-=======
->>>>>>> 40751b63def7de1e7274cdd67562e30196e72b5e
                 $('#clickInfo').html('');
                 if(geocoder._typeahead.selected.place_type == "sensor"){
                     $('#sensorInfo').html(
