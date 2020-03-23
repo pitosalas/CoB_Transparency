@@ -19,10 +19,25 @@ $gray-medium-light: #eaeaea;
   height: 30%;
   bottom: 0;
   overflow: hidden;
-  background-color: darkgrey; color: black;
+  background-color: grey; color: black;
   transition: height 0.3s;
 
   
+}
+.rounded-box {
+  position: absolute;
+  border-radius: 25px;
+  width: 99%;
+  height: 90%;
+  top: 5%;
+  left: 0.5%;
+  padding-top: 1%;
+  padding-left: 1%;
+  background-color: lightsteelblue;
+  #searchInfo{
+    width: 100%;
+    overflow: scroll;
+  }
 }
 
 .slider.close {
