@@ -212,6 +212,7 @@
                         $('.slider').toggleClass('close');
                         if ($('.slider').hasClass("see-more")){
                             $('.slider').toggleClass("see-more");
+                            $('#expandthis').text("See More");
                         }
                         infoClosed = true;
                     }
@@ -222,8 +223,10 @@
             $('#expandthis').click(function(){
                 $.ajax({
                     success: function(){
-                        
                         $('.slider').toggleClass('see-more');
+                        $('#expandthis').text(function(i, text){
+                            return text === "See More" ? "See Less" : "See More";
+                        })
                     }
                 }) 
             });
