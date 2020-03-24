@@ -44,7 +44,7 @@
             maxZoom: 20
         });
 
-        map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+        map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
         map.on('load', function() {
             map.addSource('sensor_loc', {
                 type: 'geojson',
