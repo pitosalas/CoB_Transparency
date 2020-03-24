@@ -6,23 +6,13 @@ class HomeController < ApplicationController
         @sensors = Sensor.all
         @study_areas = StudyArea.all
         @points = Point.all
-        @layerInfo = layerInfoBuilder
+        
         render 'home/index'
     end
 
     def get_studyArea
         @study_areas = StudyArea
         render json: @study_areas.as_json
-    end
-
-    def layerInfoBuilder
-        layers = [
-            {"layerID" => "sensor_loc", "layerName" => "Clusters"},
-            {"layerID" => "unclustered-point", "layerName" => "Sensors"},
-            {"layerID" => "sensor_loc_count", "layerName" => "# of Sensors"},
-            {"layerID" => "neighborhood_fill", "layerName" => "Boston Neighborhoods"},
-            {"layerID" => "neighborhood_line", "layerName" => "Neighborhood Boundaries"}
-        ]   
     end
 end
 

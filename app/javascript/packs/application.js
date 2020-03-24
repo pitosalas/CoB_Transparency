@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("jquery")
 require("mapbox/custom_mapbox")
+require("essential/map")
 import "bootstrap"
 
 //= require ../coordinateShow

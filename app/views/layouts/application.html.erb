@@ -18,18 +18,35 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-      <div class= "map-container">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+      
       <%= yield %>
-      </div>
+      
       
       <div class="slider close">
-        <div class="rounded-box">
-          <div id="searchInfo"></div>
-          <button id="exitthis"> Close </button>
-        </div>
+        
+          <div class="rounded-box">
+            <div class="row">
+
+              <div class = "col">
+                <div id="searchInfo"></div>
+              </div>
+
+              <div class = "col">
+                
+              </div>
+
+            </div>
+            <hr>
+            <div class="row">
+              
+                <button id="exitthis" class="btn btn-primary"> Close </button>
+              
+            </div>
+          </div>
+        
       </div>  
       <%= debug(params) if Rails.env.development? %>
   </body>

@@ -132,7 +132,7 @@
                 'layout': {},
                 'paint': {
                     'fill-color': '#f27373',
-                    'fill-opacity': 0.2
+                    'fill-opacity': 0.1
                 }
             });
             map.addLayer({
@@ -141,7 +141,8 @@
                 'source' : 'neighborhood_loc',
                 'paint': {
                     'line-color': 'rgba(255, 0, 0, 1)',
-                    'line-width': 2
+                    'line-width': 3,
+                    'line-opacity': 0.2
                 }
             });
             
@@ -182,7 +183,9 @@
             });
 
             map.on('click', 'unclustered-point', function(e) {
+                
                 var holo=e.features[0];
+                map.flyTo({center: holo.geometry.coordinates});
                 $.ajax({
                 success: function() {
                     $('.slider').toggleClass('close', infoClosed);
@@ -234,6 +237,8 @@
                     );
                 });
             })
+
+            
         });
 
         
