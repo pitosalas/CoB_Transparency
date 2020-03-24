@@ -12,6 +12,7 @@
     width: 100%; 
     height: 100%;
 }
+
 .marker {
     background-image: url('mapbox-icon.png');
     background-size: cover;
@@ -57,9 +58,9 @@
 }
      
 
-    .filter-group input[type='checkbox']:checked + label {
-        background-color: white;
-    }
+.filter-group input[type='checkbox']:checked + label {
+    background-color: white;
+}
      
-    
+
 

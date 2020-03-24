@@ -7,7 +7,7 @@ class HomeController < ApplicationController
         @study_areas = StudyArea.all
         @points = Point.all
         
-        render 'home/index'
+        render 'home/map'
     end
 
     def get_studyArea

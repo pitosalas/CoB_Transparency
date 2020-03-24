@@ -35,12 +35,16 @@ $gray-medium-light: #eaeaea;
     box-shadow: 0px -1.5px 10px rgba(0,0,0,0.3);
     #searchInfo{
       position: relative;
-    
       height: 50%;
       width: 100%;
       overflow-y: scroll;
       overflow-x: hidden;
     }
+
+    #searchInfo::-webkit-scrollbar { /* WebKit */
+      display: none;
+    }
+
     #exitthis{
       position:relative;
     }
@@ -55,9 +59,7 @@ $gray-medium-light: #eaeaea;
 }
 
 
-#searchInfo::-webkit-scrollbar { /* WebKit */
-  display: none;
-}
+
 
 
 
