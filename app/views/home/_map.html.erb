@@ -210,10 +210,22 @@
                 $.ajax({
                     success: function(){
                         $('.slider').toggleClass('close');
+                        if ($('.slider').hasClass("see-more")){
+                            $('.slider').toggleClass("see-more");
+                        }
                         infoClosed = true;
                     }
                 })
                 
+            });
+
+            $('#expandthis').click(function(){
+                $.ajax({
+                    success: function(){
+                        
+                        $('.slider').toggleClass('see-more');
+                    }
+                }) 
             });
 
 
