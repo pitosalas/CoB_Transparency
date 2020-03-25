@@ -8,7 +8,7 @@
     <%= csp_meta_tag %>
     <!-- Favicons -->
     <%= favicon_link_tag asset_path('COB_B.jpeg'), rel: "icon"%>
-    <%# <%= favicon_link_tag asset_path('apple-touch-icon.png'), rel: "apple-touch-icon"%> %>
+    <%# <%= favicon_link_tag asset_path('apple-touch-icon.png'), rel: "apple-touch-icon"%> 
 
     <%= stylesheet_link_tag 'application', media: 'all',
                                            'data-turbolinks-track': 'reload' %>
@@ -36,6 +36,9 @@
             <div id="searchInfo"></div>
               
             <hr>
+            <div class = "container">
+              <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
+            </div>
           </div>
         
       </div>  
