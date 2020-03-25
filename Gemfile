@@ -65,7 +65,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'better_errors'
 gem 'pry-byebug'
 gem 'hirb'
-gem 'rails_admin'
+gem 'rails_admin', '~> 2.0'
+gem "rails_admin_import", "~> 2.2"
 gem 'bcrypt',     '3.1.13'
 
 # for seed.rb file
