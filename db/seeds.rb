@@ -24,7 +24,9 @@ StudyArea.delete_all
                 email: Faker::Internet.email, 
                 password: password, 
                 password_confirmation: password, 
-                access_code: 'pororo')
+                access_code: 'pororo', 
+                activated: true,
+                activated_at: Time.zone.now)
 end
 
 sensor_csv_path = "./db/sensors.csv"
