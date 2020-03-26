@@ -10,9 +10,12 @@ class AdministratorPagesController < ApplicationController
   end
 
   def help
+
+
   end
 
   def about
+    render 'administrator_pages/about'
   end
 
   def contact
