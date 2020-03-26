@@ -11,9 +11,12 @@ class AdministratorsController < ApplicationController
   def create
     @administrator = Administrator.new(administrator_params)
     if @administrator.save 
-      log_in @administrator
-      flash[:success] = "Welcome to the CoB Transparency Project"
-      redirect_to '/admin'
+      @administrator.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to login_path
+      #log_in @administrator
+      #flash[:success] = "Welcome to the CoB Transparency Project"
+      #redirect_to '/admin'
       #redirect_to @administrator
     else
       render 'new'

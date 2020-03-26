@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_25_202707) do
+ActiveRecord::Schema.define(version: 2020_03_26_144410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 2020_03_25_202707) do
     t.string "password_digest"
     t.string "access_code"
     t.string "remember_digest"
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
     t.index ["email"], name: "index_administrators_on_email", unique: true
   end
 
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 2020_03_25_202707) do
   end
 
   create_table "sensors", force: :cascade do |t|
-    t.integer "sensor_id"
+    t.string "sensor_id"
     t.string "sensor_type"
     t.string "ownership"
     t.string "gov_owned"
