@@ -21,7 +21,6 @@
       >
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Help", help_path %></li>
         <li><%= link_to "Feedback", feedbacks_path %></li>
         <% if logged_in? %>
           <li><%= link_to "Administrators", '/admin' %></li>
@@ -41,6 +40,7 @@
           <% else %>
             <li><%= link_to "Log in", login_path %></li>
           <% end %>
+          <li><%= link_to image_tag("info.png", alt: "Info logo", width: "20"), help_path %></li>
       </ul>
     </nav>
   </div>
