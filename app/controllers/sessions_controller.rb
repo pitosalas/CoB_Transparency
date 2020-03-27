@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       if administrator.activated?
         log_in administrator
         params[:session][:remember_me] == '1' ? remember(administrator) : forget(administrator)
-        redirect_back_or '/admin'
+        redirect_to '/admin'
       else
         message  = "Account not activated. "
         message += "Check your email for the activation link."
