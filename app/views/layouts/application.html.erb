@@ -20,27 +20,31 @@
       <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
       
+    <div class = "map-container">
       <%= yield %>
-      
-      
-      <div class="slider close">
+    </div>
+    
+    <div class="slider close">
         
-          <div class="rounded-box">
-            <div class = "text-center">
-              <button id="expandthis" class="btn btn-info ">See More</button>
-              <button id="exitthis" class="btn btn-primary ">Close</button>
-            </div>
-            <hr>
-            <div id="searchInfo"></div>
+      <div class="rounded-box">
+        <div class = "text-center">
+          <button id="expandthis" class="btn btn-info ">See More</button>
+          <button id="exitthis" class="btn btn-primary ">Close</button>
+        </div>
+
+        <hr>
+
+        <div id="searchInfo"></div>
               
-            <hr>
-            <div class = "container">
-              <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
-            </div>
+        <hr>
+
+          <div class = "container">
+            <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
           </div>
+
+      </div>
         
-      </div>  
-      <%= debug(params) if Rails.env.development? %>
+    </div>  
   </body>
 
 </html>
