@@ -2,7 +2,10 @@
 
 <p>
   <strong>Type:</strong>
+  <%= @sensor.sensor_id %>
   <%= @sensor.sensor_type %>
+  <%= @sensor.ownership %>
+
 </p>
 
 <%= link_to 'Edit', edit_sensor_path(@sensor) %> |

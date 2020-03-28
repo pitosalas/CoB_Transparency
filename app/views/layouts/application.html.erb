@@ -27,20 +27,22 @@
     <div class="slider close">
         
       <div class="rounded-box">
+      
         <div class = "text-center">
           <button id="expandthis" class="btn btn-info ">See More</button>
           <button id="exitthis" class="btn btn-primary ">Close</button>
         </div>
 
         <hr>
-
-        <div id="searchInfo"></div>
-              
+        
+            <div id="searchInfo"></div>
+        
         <hr>
 
-          <div class = "container">
-            <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
-          </div>
+        <div class = "container">
+          <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
+        </div>
+          
 
       </div>
         
