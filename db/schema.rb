@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_014422) do
   end
 
   create_table "sensors", force: :cascade do |t|
-    t.string "sensor_id"
+    t.integer "sensor_id"
     t.string "sensor_type"
     t.string "ownership"
     t.string "gov_owned"
