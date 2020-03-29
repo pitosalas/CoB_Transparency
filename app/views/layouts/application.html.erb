@@ -8,45 +8,22 @@
     <%= csp_meta_tag %>
     
 
-    <%= stylesheet_link_tag 'application', media: 'all',
-                                           'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= render 'layouts/shim' %>
     
   </head>
+  
   <body>
     <%= render 'layouts/header' %>
     <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
       
-    <div class = "map-container">
+    <div class = "content-container">
       <%= yield %>
     </div>
-    
-    <div class="slider close">
-        
-      <div class="rounded-box">
-      
-        <div class = "text-center">
-          <button id="expandthis" class="btn btn-info ">See More</button>
-          <button id="exitthis" class="btn btn-primary ">Close</button>
-        </div>
 
-        <hr>
-        
-            <div id="searchInfo"></div>
-        
-        <hr>
-
-        <div class = "container">
-          <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
-        </div>
-          
-
-      </div>
-        
-    </div>  
   </body>
 
 </html>

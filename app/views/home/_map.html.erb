@@ -10,14 +10,31 @@
 
     <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
 
-
-
-
     <div id='map'></div>
-    <div class = "geocoder" id ="geocoder">
-
+    <div class = "geocoder" id ="geocoder"></div>
     <nav id="filter-group" class="filter-group" id="toggle-buttons"></nav>
-    <script>
+    <div class="slider close">
+      <div class="rounded-box">
+
+        <div class = "text-center">
+          <button id="expandthis" class="btn btn-info ">See More</button>
+          <button id="exitthis" class="btn btn-primary ">Close</button>
+        </div>
+
+        <hr>
+        
+        <div id="searchInfo" data-turbolinks="false"></div>
+
+        <hr>
+
+        <div class = "container">
+          <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
+        </div>
+          
+      </div>  
+    </div>  
+
+    <script data-turbolinks="false">
         mapboxgl.accessToken = 'pk.eyJ1Ijoibm9zc3UzNzUxIiwiYSI6ImNrNzRxbHo3bzA4MW4zZm8zdmxpZ294MzEifQ.HcBzxOgPOrQHFhplZ0FuXQ';
 
         var sen = <%= raw render template: "sensors/index.json.jbuilder" %>
@@ -41,20 +58,24 @@
 
         map.addControl(new mapboxgl.NavigationControl(), 'top-right');
         map.on('load', function() {
-            map.addSource('sensor_loc', {
-                type: 'geojson',
-                data: sen,
+            if(map.getSource("sensor_loc") == undefined){
+                map.addSource('sensor_loc', {
+                    type: 'geojson',
+                    data: sen,
 
-                <% if false %>
-                # cluster: true,
-                # clusterMaxZoom: 15,
-                # clusterRadius: 50
-                <% end %>
-            });
-            map.addSource('neighborhood_loc', {
-                type: 'geojson',
-                data: neighborhood
-            });
+                    <% if false %>
+                    # cluster: true,
+                    # clusterMaxZoom: 15,
+                    # clusterRadius: 50
+                    <% end %>
+                });
+            };
+            if(map.getSource("neighborhood_loc") == undefined){
+                map.addSource('neighborhood_loc', {
+                    type: 'geojson',
+                    data: neighborhood
+                });
+            };
             map.addLayer({
                 id: 'sensor_loc',
                 type: 'circle',
@@ -104,7 +125,16 @@
                 source: 'sensor_loc',
             
                 paint: {
-                    'circle-color': '#11b4da',
+                    'circle-color': [ 
+                        'match',
+                        ['get','sensor_type'],
+                        'camera',
+                        '#11b4da',
+                        'counter',
+                        '#fb4d42',
+                        '#d7d3c1' 
+
+                    ],      
                     'circle-radius': [
                         "interpolate", ["linear"], ["zoom"],
         
@@ -188,18 +218,21 @@
                 
                 geocoder._removeMarker();
                 var holo=e.features[0];
-                
                 map.flyTo({center: holo.geometry.coordinates});
+                var path = '/sensors/'+holo.properties.id + '.html';
+
                 $.ajax({
-                success: function() {
-                    
-                    $('.slider').toggleClass('close', infoClosed);
-                    infoClosed = false;
-                    $('#searchInfo').html("<p>"+e.lngLat+
-                    "</p>"+"<p>Ownership: "+ holo.properties.ownership+"</p><p>Sensor Type: "+holo.properties.sensor_type+
-                    "</p><p>Description: "+holo.properties.description+"</p>")
-                }
-            })
+                    success: function() {
+                        $('.slider').toggleClass('close', infoClosed);
+                        infoClosed = false;
+
+                        $("#searchInfo").load(path + " .content-container");
+
+                    },
+                    error:function(){
+                        alert('Error');
+                    }
+                })
             });
 
 
@@ -313,14 +346,9 @@
                     return;
                 }
                 if(geocoder._typeahead.selected.place_type == "sensor"){
-                    $('#searchInfo').html(
-                        "<p>" + geocoder._typeahead.selected.place_name + "<p>" +
-                        "<p>" + geocoder._typeahead.selected.center.toString() + "<p>" +
-                        "<p>" + geocoder._typeahead.selected.properties.sensor_type + "<p>" +
-                        "<p>" + geocoder._typeahead.selected.properties.ownership + "<p>" +
-                        "<p>" + geocoder._typeahead.selected.properties.datatype + "<p>" 
-                        
-                    )
+                    var path = '/sensors/'+ geocoder._typeahead.selected.properties.id + '.html';
+
+                    $("#searchInfo").load(path + " .content-container");
                 
                 }else{
                     $('#searchInfo').html(

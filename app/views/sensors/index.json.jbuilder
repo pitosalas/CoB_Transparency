@@ -8,6 +8,7 @@ json.features @sensors.each do |sensor|
         json.set! :coordinates, longlat
     end
     json.set! :properties do
+        json.set! :id, sensor.id
         json.set! :sensor_id, sensor.sensor_id 
         json.set! :sensor_type, sensor.sensor_type
         json.set! :ownership, sensor.ownership
