@@ -30,21 +30,25 @@
       left: 2.34%;
       background-color: rgb(250, 250, 250);
       box-shadow: 0px -1.5px 10px rgba(0,0,0,0.3);
-      #searchInfo{
+      
+    #searchInfo{
         position: relative;
         height: 50%;
         width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
         overflow-y: scroll;
-        overflow-x: scroll;
-      }
+        overflow-x: hidden;
+    }
+      
   
-      #searchInfo::-webkit-scrollbar { /* WebKit */
+    #searchInfo::-webkit-scrollbar { /* WebKit */
         display: none;
-      }
+    }
   
-      #exitthis{
+    #exitthis{
         position:relative;
-      }
+    }
       
       
     }
@@ -64,7 +68,7 @@
       height: 45%;
       width: 100%;
       overflow-y: scroll;
-      overflow-x: scroll;
+      overflow-x: hidden;
     }
   }
   
@@ -304,3 +308,38 @@
 }
 
 
+// typography 
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+  }
+  
+  h1 {
+    font-size: 3em;
+    letter-spacing: 0px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+    color: $gray-light;
+  }
+  
+  p {
+    font-size: 1.1em;
+    line-height: 1.7em;
+  }
+  
+  hr{
+    height: 1px;
+    color: #FB4D42;
+    background-color: #FB4D42;
+    border: none;
+  }

@@ -7,8 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
     
-
     <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
+
 
     <div id='map'></div>
     <div class = "geocoder" id ="geocoder"></div>
@@ -24,7 +24,7 @@
         <hr>
         
         <div id="searchInfo" data-turbolinks="false"></div>
-
+        
         <hr>
 
         <div class = "container">
@@ -76,107 +76,117 @@
                     data: neighborhood
                 });
             };
-            map.addLayer({
-                id: 'sensor_loc',
-                type: 'circle',
-                source: 'sensor_loc',
-                filter: ['has','point_count'],
-                paint: {
-                    'circle-color': [
-                        'step',
-                        ['get', 'point_count'],
-                        '#FEBCFF',
-                        5,
-                        '#51bbd6',
-                        20,
-                        '#f1f075',
-                        50,
-                        '#f28cb1',
-                        80,
-                        '#51bbd6',
-                        120,
-                        '#f1f075',
-                        200,
-                        '#f1f075',
-                    ],
-                    'circle-radius': [
-                        'step',
-                        ['get', 'point_count'],
-                        20,
-                        5,
-                        80,
-                        20,
-                        120,
-                        50,
-                        180,
-                        80,
-                        270,
-                        120,
-                        350,
-                        200,
-                        400
-                    ],
-                    'circle-opacity': 0.3
-                }    
-            });
-            map.addLayer({
-                id: 'unclustered-point',
-                type: 'circle',
-                source: 'sensor_loc',
-            
-                paint: {
-                    'circle-color': [ 
-                        'match',
-                        ['get','sensor_type'],
-                        'camera',
-                        '#11b4da',
-                        'counter',
-                        '#fb4d42',
-                        '#d7d3c1' 
+            if(map.getLayer("sensor_loc") == undefined){
+                map.addLayer({
+                    id: 'sensor_loc',
+                    type: 'circle',
+                    source: 'sensor_loc',
+                    filter: ['has','point_count'],
+                    paint: {
+                        'circle-color': [
+                            'step',
+                            ['get', 'point_count'],
+                            '#FEBCFF',
+                            5,
+                            '#51bbd6',
+                            20,
+                            '#f1f075',
+                            50,
+                            '#f28cb1',
+                            80,
+                            '#51bbd6',
+                            120,
+                            '#f1f075',
+                            200,
+                            '#f1f075',
+                        ],
+                        'circle-radius': [
+                            'step',
+                            ['get', 'point_count'],
+                            20,
+                            5,
+                            80,
+                            20,
+                            120,
+                            50,
+                            180,
+                            80,
+                            270,
+                            120,
+                            350,
+                            200,
+                            400
+                        ],
+                        'circle-opacity': 0.3
+                    }    
+                })
+            };
+            if(map.getLayer("unclustered-point") == undefined){
+                map.addLayer({
+                    id: 'unclustered-point',
+                    type: 'circle',
+                    source: 'sensor_loc',
+                
+                    paint: {
+                        'circle-color': [ 
+                            'match',
+                            ['get','sensor_type'],
+                            'camera',
+                            '#11b4da',
+                            'counter',
+                            '#fb4d42',
+                            '#d7d3c1' 
 
-                    ],      
-                    'circle-radius': [
-                        "interpolate", ["linear"], ["zoom"],
-        
-                        11, 1.5,
-                        13, 3,
-                        15, 5,
-                        18, 7,
-                        20, 9
-                    ]   
-                }
-            });
-            map.addLayer({
-                id: 'sensor_loc_count',
-                type: 'symbol',
-                source: 'sensor_loc',
-                filter: ['has','point_count'],
-                layout: {
-                    'text-field': '{point_count_abbreviated}',
-                    'text-font': ['Montserrat SemiBold', 'Arial Unicode MS Bold'],
-                    'text-size': 24
-                }          
-            });
-            map.addLayer({
-                'id': 'neighborhood_fill',
-                'type': 'fill',
-                'source' : 'neighborhood_loc',
-                'layout': {},
-                'paint': {
-                    'fill-color': '#f27373',
-                    'fill-opacity': 0.1
-                }
-            });
-            map.addLayer({
-                'id': 'neighborhood_line',
-                'type': 'line',
-                'source' : 'neighborhood_loc',
-                'paint': {
-                    'line-color': 'rgba(255, 0, 0, 1)',
-                    'line-width': 3,
-                    'line-opacity': 0.2
-                }
-            });
+                        ],      
+                        'circle-radius': [
+                            "interpolate", ["linear"], ["zoom"],
+            
+                            11, 1.5,
+                            13, 3,
+                            15, 5,
+                            18, 7,
+                            20, 9
+                        ]   
+                    }
+                })
+            };
+            if(map.getLayer("sensor_loc_count") == undefined){
+                map.addLayer({
+                    id: 'sensor_loc_count',
+                    type: 'symbol',
+                    source: 'sensor_loc',
+                    filter: ['has','point_count'],
+                    layout: {
+                        'text-field': '{point_count_abbreviated}',
+                        'text-font': ['Montserrat SemiBold', 'Arial Unicode MS Bold'],
+                        'text-size': 24
+                    }          
+                })
+            };
+            if(map.getLayer("neighborhood_fill") == undefined){
+                map.addLayer({
+                    'id': 'neighborhood_fill',
+                    'type': 'fill',
+                    'source' : 'neighborhood_loc',
+                    'layout': {},
+                    'paint': {
+                        'fill-color': '#f27373',
+                        'fill-opacity': 0.1
+                    }
+                })
+            };
+            if(map.getLayer("neighborhood_line") == undefined){
+                map.addLayer({
+                    'id': 'neighborhood_line',
+                    'type': 'line',
+                    'source' : 'neighborhood_loc',
+                    'paint': {
+                        'line-color': 'rgba(255, 0, 0, 1)',
+                        'line-width': 3,
+                        'line-opacity': 0.2
+                    }
+                })
+            };
             
             
 

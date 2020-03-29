@@ -1,32 +1,46 @@
 
 <div class = "container">
 
-<p id="notice"><%= notice %></p>
-      
-    
-<p>
-  <h2>Sensor  <%= @sensor.sensor_id %></h2>
-</p>
-    
-<p>
-  <%= @sensor.sensor_type %>
-</p>
-      
-<hr>
+  <div class = "row">
+    <div class = "col-12">
+      <h1>Sensor  <%= @sensor.sensor_id %></h1>
+    </div>
+  </div>
 
-<p>
-  <strong>Ownership</strong>
-  <%= @sensor.ownership %>
-</p>
+  <div class = "row">
+    <div class = "col-12">
+      <h2><%= @sensor.sensor_type %></h2>
+    </div>
+  </div>
 
-<p>
-  <strong>Government Owned?</strong>
-  <%= @sensor.gov_owned %>
-</p>
+  <p>
+  <p>
 
-<p>
-  <strong>Operation Hours</strong>
-  <%= @sensor.op_hrs %>
-</p>
+  <div class = "row">
+    <div class = "col-6">
+      <strong>Ownership</strong>
+    </div>
+    <div class = "col-6">
+      <%= @sensor.ownership %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-6">
+      <strong>Government Owned?</strong>
+    </div>
+    <div class = "col-6">
+      <%= @sensor.gov_owned %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-6">
+      <strong>Operation Hours</strong>
+    </div>
+    <div class = "col-6">
+      <%= @sensor.op_hrs %>
+    </div>
+  </div>
 
 </div>
