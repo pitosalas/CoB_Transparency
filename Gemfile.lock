@@ -107,6 +107,7 @@ GEM
     ffi (1.12.2-x86-mingw32)
     formatador (0.2.5)
     gem-open (0.1.8)
+    geocoder (1.6.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     guard (2.15.0)
@@ -358,6 +359,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   faker
   gem-open
+  geocoder
   guard (= 2.15.0)
   guard-minitest (= 2.4.6)
   hirb
