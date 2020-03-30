@@ -40,7 +40,17 @@
             overflow-y: scroll;
             overflow-x: hidden;
         }
+
+        // .feedback-area{
+        //     position: absolute;
+        //     width: 100%;
+        //     overflow-y: scroll;
+        //     overflow-x: hidden;
+        // }
       
+        // .feedback-area::-webkit-scrollbar{
+        //     display: none;
+        // }
   
         #searchInfo::-webkit-scrollbar { /* WebKit */
             display: none;
@@ -55,6 +65,7 @@
     
 }
   
+
  
 
 .slider.close {
@@ -65,7 +76,7 @@
     height: 97%;
     #searchInfo{
       position: relative;
-      height: 40%;
+      height: 30%;
       width: 100%;
       overflow-y: scroll;
       overflow-x: hidden;
