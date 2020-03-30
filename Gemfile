@@ -75,3 +75,4 @@ gem 'random-location'
 gem 'random-password'
 
 gem 'gem-open'
+gem 'geocoder'

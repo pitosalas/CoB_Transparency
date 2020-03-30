@@ -12,7 +12,20 @@
 
     <div id='map'></div>
     <div class = "geocoder" id ="geocoder"></div>
-    <nav id="filter-group" class="filter-group" id="toggle-buttons"></nav>
+    <div class = "toggleSwitch close">
+        <nav id="filter-group" class="filter-group" id="toggle-buttons"></nav>
+        <div class = "filter-group-toggle"></div>
+    </div>
+
+
+    <script>
+        
+        $(".filter-group-toggle").click(function(){
+            $(".toggleSwitch").toggleClass("close");      
+        });
+    </script>
+
+
     <div class="slider close">
       <div class="rounded-box">
 
@@ -231,6 +244,13 @@
                 map.flyTo({center: holo.geometry.coordinates});
                 var path = '/sensors/'+holo.properties.id + '.html';
 
+                var defaultMarkerOptions = {
+                    color: '#FB4D42'
+                }
+                var markerOptions = $.extend({}, defaultMarkerOptions, geocoder.options.marker)
+                geocoder.mapMarker = new geocoder._mapboxgl.Marker(markerOptions);
+                geocoder.mapMarker.setLngLat(holo.geometry.coordinates).addTo(geocoder._map);
+
                 $.ajax({
                     success: function() {
                         $('.slider').toggleClass('close', infoClosed);
@@ -282,6 +302,7 @@
 
 
             layerInfo.layers.forEach(function(li){
+                
                 var input = document.createElement('input');
                 input.type = 'checkbox';
                 input.id = li.layerID;
