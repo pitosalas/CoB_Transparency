@@ -1,340 +1,261 @@
 
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css' rel='stylesheet' />
-    
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css' rel='stylesheet' />
 
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-    
-    <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+<script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
 
 
-    <div id='map'></div>
-    <div class = "geocoder" id ="geocoder"></div>
-    <div class = "toggleSwitch close">
-        <nav id="filter-group" class="filter-group" id="toggle-buttons"></nav>
-        <div class = "filter-group-toggle"></div>
+<div id='map'></div>
+<div class = "geocoder" id ="geocoder"></div>
+<div class = "toggleSwitch close">
+    <nav id="filter-group" class="filter-group" id="toggle-buttons"></nav>
+    <div class = "filter-group-toggle"></div>
+</div>
+
+<div class="slider close">
+    <div class="rounded-box">
+
+    <div class = "text-center">
+        <button id="expandthis" class="btn btn-info ">See More</button>
+        <button id="exitthis" class="btn btn-primary ">Close</button>
     </div>
 
+    <hr>
+    
+    <div id="searchInfo" data-turbolinks="false"></div>
+    
+    <hr>
 
-    <script>   
-        $(".filter-group-toggle").click(function(){
-            $(".toggleSwitch").toggleClass("close");      
-        });
-    </script>
-
-
-    <div class="slider close">
-      <div class="rounded-box">
-
-        <div class = "text-center">
-          <button id="expandthis" class="btn btn-info ">See More</button>
-          <button id="exitthis" class="btn btn-primary ">Close</button>
+    <div class = "container">
+        <div class = "feedback-area">
+        <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
         </div>
-
-        <hr>
+    </div>
         
-        <div id="searchInfo" data-turbolinks="false"></div>
-        
-        <hr>
-
-        <div class = "container">
-            <div class = "feedback-area">
-            <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
-            </div>
-        </div>
-          
-      </div>  
     </div>  
+</div>  
 
-    <script data-turbolinks="false">
-        mapboxgl.accessToken = 'pk.eyJ1Ijoibm9zc3UzNzUxIiwiYSI6ImNrNzRxbHo3bzA4MW4zZm8zdmxpZ294MzEifQ.HcBzxOgPOrQHFhplZ0FuXQ';
+<script>
+    
+    $(".filter-group-toggle").click(function(){
+        $(".toggleSwitch").toggleClass("close");      
+    });
 
-        var sen = <%= raw render template: "sensors/index.json.jbuilder" %>
-        var layerInfo = <%= raw render template: "home/index.json.jbuilder" %>
-        var neighborhood = 'https://gist.githubusercontent.com/nossu3751/3a92073b0333314e360185906d56772f/raw/3e86f1b621080aa431593b334114d4c0f9479b71/neighborhoods.geojson'
+    mapboxgl.accessToken = 'pk.eyJ1Ijoibm9zc3UzNzUxIiwiYSI6ImNrNzRxbHo3bzA4MW4zZm8zdmxpZ294MzEifQ.HcBzxOgPOrQHFhplZ0FuXQ';
 
-        var layer_ids = ["sensor_loc", "unclustered-point", "sensor_loc_count", "neighborhood_fill", "neighborhood_line"]
+    var sen = <%= raw render template: "sensors/index.json.jbuilder" %>
+    var layerInfo = <%= raw render template: "home/index.json.jbuilder" %>
+    var neighborhood = 'https://gist.githubusercontent.com/nossu3751/3a92073b0333314e360185906d56772f/raw/3e86f1b621080aa431593b334114d4c0f9479b71/neighborhoods.geojson'
+    var layer_ids = ["sensor_loc", "unclustered-point", "sensor_loc_count", "neighborhood_fill", "neighborhood_line"]
+    var filterGroup = document.getElementById('filter-group');
+    var infoClosed = true;
+        
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/nossu3751/ck757utxk36gn1io7vjmmmrnh/draft',
+        center: [-71.057991, 42.360405],
+        zoom: 10,
+        minZoom: 10,
+        maxZoom: 20,
+        maxBounds: [[-71.194540,42.216314],[-70.920614,42.409770]]
+    });
 
-        var filterGroup = document.getElementById('filter-group');
-        var infoClosed = true;
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    map.on('load', function() {
+        if(map.getSource("sensor_loc") == undefined){
+            map.addSource('sensor_loc', {
+                type: 'geojson',
+                data: sen,
+            });
+        };
 
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/nossu3751/ck757utxk36gn1io7vjmmmrnh/draft',
-            center: [-71.057991, 42.360405],
-            zoom: 10,
-            minZoom: 10,
-            maxZoom: 20,
-            maxBounds: [[-71.194540,42.216314],[-70.920614,42.409770]]
-        });
+        if(map.getSource("neighborhood_loc") == undefined){
+            map.addSource('neighborhood_loc', {
+                type: 'geojson',
+                data: neighborhood
+            });
+        };
+            
+        if(map.getLayer("unclustered-point") == undefined){
+            map.addLayer({
+                id: 'unclustered-point',
+                type: 'circle',
+                source: 'sensor_loc',                  
+                paint: {
+                    'circle-color': [ 
+                        'match',
+                        ['get','sensor_type'],
+                        'camera',
+                        '#11b4da',
+                        'counter',
+                        '#fb4d42',
+                        '#d7d3c1' 
+                    ],      
+                    'circle-radius': [
+                        "interpolate", ["linear"], ["zoom"],               
+                        11, 1.5,
+                        13, 3,
+                        15, 5,
+                        18, 7,
+                        20, 9
+                    ]   
+                }
+            })
+        };
+            
+        if(map.getLayer("neighborhood_fill") == undefined){
+            map.addLayer({
+                'id': 'neighborhood_fill',
+                'type': 'fill',
+                'source' : 'neighborhood_loc',
+                'layout': {},
+                'paint': {
+                    'fill-color': '#f27373',
+                    'fill-opacity': 0.1
+                }
+            })
+        };
 
-        map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-        map.on('load', function() {
-            if(map.getSource("sensor_loc") == undefined){
-                map.addSource('sensor_loc', {
-                    type: 'geojson',
-                    data: sen,
+        if(map.getLayer("neighborhood_line") == undefined){
+            map.addLayer({
+                'id': 'neighborhood_line',
+                'type': 'line',
+                'source' : 'neighborhood_loc',
+                'paint': {
+                    'line-color': 'rgba(255, 0, 0, 1)',
+                    'line-width': 3,
+                    'line-opacity': 0.2
+                }
+            })
+        };
 
-                    <% if false %>
-                    # cluster: true,
-                    # clusterMaxZoom: 15,
-                    # clusterRadius: 50
-                    <% end %>
-                });
-            };
-            if(map.getSource("neighborhood_loc") == undefined){
-                map.addSource('neighborhood_loc', {
-                    type: 'geojson',
-                    data: neighborhood
-                });
-            };
-            if(map.getLayer("sensor_loc") == undefined){
-                map.addLayer({
-                    id: 'sensor_loc',
-                    type: 'circle',
-                    source: 'sensor_loc',
-                    filter: ['has','point_count'],
-                    paint: {
-                        'circle-color': [
-                            'step',
-                            ['get', 'point_count'],
-                            '#FEBCFF',
-                            5,
-                            '#51bbd6',
-                            20,
-                            '#f1f075',
-                            50,
-                            '#f28cb1',
-                            80,
-                            '#51bbd6',
-                            120,
-                            '#f1f075',
-                            200,
-                            '#f1f075',
-                        ],
-                        'circle-radius': [
-                            'step',
-                            ['get', 'point_count'],
-                            20,
-                            5,
-                            80,
-                            20,
-                            120,
-                            50,
-                            180,
-                            80,
-                            270,
-                            120,
-                            350,
-                            200,
-                            400
-                        ],
-                        'circle-opacity': 0.3
-                    }    
-                })
-            };
-            if(map.getLayer("unclustered-point") == undefined){
-                map.addLayer({
-                    id: 'unclustered-point',
-                    type: 'circle',
-                    source: 'sensor_loc',
+        layerInfo.layers.forEach(function(li){
                 
-                    paint: {
-                        'circle-color': [ 
-                            'match',
-                            ['get','sensor_type'],
-                            'camera',
-                            '#11b4da',
-                            'counter',
-                            '#fb4d42',
-                            '#d7d3c1' 
+            var liid= "#"+li.layerID;
+                
+            if((filterGroup.querySelector(liid) == null)){
+                var input = document.createElement('input');
+                input.type = 'checkbox';
+                input.id = li.layerID;
+                input.checked = true;
+                filterGroup.appendChild(input);
 
-                        ],      
-                        'circle-radius': [
-                            "interpolate", ["linear"], ["zoom"],
-            
-                            11, 1.5,
-                            13, 3,
-                            15, 5,
-                            18, 7,
-                            20, 9
-                        ]   
-                    }
-                })
-            };
-            if(map.getLayer("sensor_loc_count") == undefined){
-                map.addLayer({
-                    id: 'sensor_loc_count',
-                    type: 'symbol',
-                    source: 'sensor_loc',
-                    filter: ['has','point_count'],
-                    layout: {
-                        'text-field': '{point_count_abbreviated}',
-                        'text-font': ['Montserrat SemiBold', 'Arial Unicode MS Bold'],
-                        'text-size': 24
-                    }          
-                })
-            };
-            if(map.getLayer("neighborhood_fill") == undefined){
-                map.addLayer({
-                    'id': 'neighborhood_fill',
-                    'type': 'fill',
-                    'source' : 'neighborhood_loc',
-                    'layout': {},
-                    'paint': {
-                        'fill-color': '#f27373',
-                        'fill-opacity': 0.1
-                    }
-                })
-            };
-            if(map.getLayer("neighborhood_line") == undefined){
-                map.addLayer({
-                    'id': 'neighborhood_line',
-                    'type': 'line',
-                    'source' : 'neighborhood_loc',
-                    'paint': {
-                        'line-color': 'rgba(255, 0, 0, 1)',
-                        'line-width': 3,
-                        'line-opacity': 0.2
-                    }
-                })
-            };
-            
-            
+                var label = document.createElement('label');
+                label.setAttribute('for', li.layerID);
+                label.textContent = li.layerName;
+                filterGroup.appendChild(label);
 
-            map.on('click', 'neighborhood_fill', function(e) {
-                geocoder._removeMarker();
+                input.addEventListener('change', function(e) {
+                    map.setLayoutProperty(
+                        li.layerID,
+                        'visibility',
+                        e.target.checked ? 'visible' : 'none'
+                    );
+                });
+            }               
+        });         
+    });
 
-                var sensorsWithin = []
-                var holo=e.features[0];
+    map.on('click', 'neighborhood_fill', function(e) {
+        geocoder._removeMarker();
 
-                sen.features.forEach(function(s){
-                    if(turf.inside(s,holo)){
-                        sensorsWithin.push(s.properties.sensor_id)
-                    }
-                })
+        var sensorsWithin = []
+        var holo=e.features[0];
 
-                $.ajax({
-                    success: function() {
-                        $('.slider').toggleClass('close', infoClosed);
-                        infoClosed = false;
-                        $('#searchInfo').html(
-                            
-                            "<p>Neighborhood Name: "+holo.properties.Name+ "</p><p> Number of Sensors in the Area: " +sensorsWithin.length + 
-                                "</p><p>Sensors in the Area: "+ sensorsWithin+"</p>"
-                        );
+        sen.features.forEach(function(s){
+            if(turf.inside(s,holo)){
+                sensorsWithin.push(s.properties.sensor_id)
+            }
+        })
+    
+        $.ajax({
+            success: function() {
+                $('.slider').toggleClass('close', infoClosed);
+                infoClosed = false;
+                $('#searchInfo').html(                              
+                    "<p>Neighborhood Name: "+holo.properties.Name+ "</p><p> Number of Sensors in the Area: " +sensorsWithin.length + 
+                    "</p><p>Sensors in the Area: "+ sensorsWithin+"</p>"
+                );
                         
-                    }
-                })
-            });
-            
-            map.on('mouseenter', 'neighborhood_fill', function() {
-                map.getCanvas().style.cursor = 'pointer';
-            });
-            
-            map.on('mouseleave', 'neighborhood_fill', function() {
-                map.getCanvas().style.cursor = '';
-            });
+            }
+        })      
+    });
 
-            map.on('click', 'unclustered-point', function(e) {
-                
-                geocoder._removeMarker();
-                var holo=e.features[0];
-                map.flyTo({center: holo.geometry.coordinates});
-                var path = '/sensors/'+holo.properties.id + '.html';
 
-                var defaultMarkerOptions = {
-                    color: '#FB4D42'
+    map.on('mouseenter', 'neighborhood_fill', function() {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    
+    map.on('mouseleave', 'neighborhood_fill', function() {
+        map.getCanvas().style.cursor = '';
+    });
+
+    map.on('click', 'unclustered-point', function(e) {
+        
+        geocoder._removeMarker();
+        var holo=e.features[0];
+        map.flyTo({center: holo.geometry.coordinates});
+        var path = '/sensors/'+holo.properties.id + '.html';
+
+        var defaultMarkerOptions = {
+            color: '#FB4D42'
+        }
+        var markerOptions = $.extend({}, defaultMarkerOptions, geocoder.options.marker)
+        geocoder.mapMarker = new geocoder._mapboxgl.Marker(markerOptions);
+        geocoder.mapMarker.setLngLat(holo.geometry.coordinates).addTo(geocoder._map);
+
+        $.ajax({
+            success: function() {
+                $('.slider').toggleClass('close', infoClosed);
+                infoClosed = false;
+
+                $("#searchInfo").load(path + " .content-container");
+
+            },
+            error:function(){
+                alert('Error');
+            }
+        })
+    });
+
+    map.on('mouseenter', 'unclustered-point', function() {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    
+    map.on('mouseleave', 'unclustered-point', function() {
+        map.getCanvas().style.cursor = '';
+    });
+
+    $('#exitthis').click(function(){
+        geocoder._removeMarker();
+        $.ajax({
+            success: function(){
+                $('.slider').toggleClass('close');
+                if ($('.slider').hasClass("see-more")){
+                    $('.slider').toggleClass("see-more");
+                    $('#expandthis').text("See More");
                 }
-                var markerOptions = $.extend({}, defaultMarkerOptions, geocoder.options.marker)
-                geocoder.mapMarker = new geocoder._mapboxgl.Marker(markerOptions);
-                geocoder.mapMarker.setLngLat(holo.geometry.coordinates).addTo(geocoder._map);
+                infoClosed = true;
+            }
+        })
+        
+    });
 
-                $.ajax({
-                    success: function() {
-                        $('.slider').toggleClass('close', infoClosed);
-                        infoClosed = false;
-
-                        $("#searchInfo").load(path + " .content-container");
-
-                    },
-                    error:function(){
-                        alert('Error');
-                    }
+    $('#expandthis').click(function(){
+        $.ajax({
+            success: function(){
+                $('.slider').toggleClass('see-more');
+                $('#expandthis').text(function(i, text){
+                    return text === "See More" ? "See Less" : "See More";
                 })
-            });
-
-
-            map.on('mouseenter', 'unclustered-point', function() {
-                map.getCanvas().style.cursor = 'pointer';
-            });
-            
-            map.on('mouseleave', 'unclustered-point', function() {
-                map.getCanvas().style.cursor = '';
-            });
-
-            $('#exitthis').click(function(){
-                geocoder._removeMarker();
-                $.ajax({
-                    success: function(){
-                        $('.slider').toggleClass('close');
-                        if ($('.slider').hasClass("see-more")){
-                            $('.slider').toggleClass("see-more");
-                            $('#expandthis').text("See More");
-                        }
-                        infoClosed = true;
-                    }
-                })
-                
-            });
-
-            $('#expandthis').click(function(){
-                $.ajax({
-                    success: function(){
-                        $('.slider').toggleClass('see-more');
-                        $('#expandthis').text(function(i, text){
-                            return text === "See More" ? "See Less" : "See More";
-                        })
-                    }
-                }) 
-            });
-
-
-            layerInfo.layers.forEach(function(li){
-                
-                var liid= "#"+li.layerID;
-                
-                if((filterGroup.querySelector(liid) == null)){
-                    var input = document.createElement('input');
-                    input.type = 'checkbox';
-                    input.id = li.layerID;
-                    input.checked = true;
-                    filterGroup.appendChild(input);
-
-                    var label = document.createElement('label');
-                    label.setAttribute('for', li.layerID);
-                    label.textContent = li.layerName;
-                    filterGroup.appendChild(label);
-
-                    input.addEventListener('change', function(e) {
-                        map.setLayoutProperty(
-                            li.layerID,
-                            'visibility',
-                            e.target.checked ? 'visible' : 'none'
-                        );
-                    });
-                }
-                
-            });
-
-            
-        });
-     
-    </script>
-
-    <script>
+            }
+        }) 
+    });
 
     var forwardGeocoder =(query)=> {
         var matchingFeatures = [];
@@ -349,10 +270,6 @@
         }
         return matchingFeatures;
     }
-
-    </script>
-
-    <script>
     
     var geocoder = (
         new MapboxGeocoder({
@@ -402,7 +319,6 @@
         setTimeout(function() { map.flyTo([coord[1], coord[0]], 16) }, 0);
     };
 
-
     map.addControl(
         new mapboxgl.GeolocateControl({
             positionOptions: {
@@ -412,7 +328,8 @@
         })
     );
 
-    </script>
+
+</script>
 
 
 
