@@ -18,8 +18,7 @@
     </div>
 
 
-    <script>
-        
+    <script>   
         $(".filter-group-toggle").click(function(){
             $(".toggleSwitch").toggleClass("close");      
         });
@@ -305,25 +304,30 @@
 
             layerInfo.layers.forEach(function(li){
                 
-                var input = document.createElement('input');
-                input.type = 'checkbox';
-                input.id = li.layerID;
-                input.checked = true;
-                filterGroup.appendChild(input);
+                var liid= "#"+li.layerID;
+                
+                if((filterGroup.querySelector(liid) == null)){
+                    var input = document.createElement('input');
+                    input.type = 'checkbox';
+                    input.id = li.layerID;
+                    input.checked = true;
+                    filterGroup.appendChild(input);
 
-                var label = document.createElement('label');
-                label.setAttribute('for', li.layerID);
-                label.textContent = li.layerName;
-                filterGroup.appendChild(label);
+                    var label = document.createElement('label');
+                    label.setAttribute('for', li.layerID);
+                    label.textContent = li.layerName;
+                    filterGroup.appendChild(label);
 
-                input.addEventListener('change', function(e) {
-                    map.setLayoutProperty(
-                        li.layerID,
-                        'visibility',
-                        e.target.checked ? 'visible' : 'none'
-                    );
-                });
-            })
+                    input.addEventListener('change', function(e) {
+                        map.setLayoutProperty(
+                            li.layerID,
+                            'visibility',
+                            e.target.checked ? 'visible' : 'none'
+                        );
+                    });
+                }
+                
+            });
 
             
         });
