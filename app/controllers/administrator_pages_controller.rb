@@ -4,7 +4,6 @@ class AdministratorPagesController < ApplicationController
         #@gj = GeoJson.new(Sensor.all)
         #@sa = GeoJson.new(@sa.to_points)
         @sensors = Sensor.all
-        @study_areas = StudyArea.all
         @layerInfo = layerInfoBuilder
         render 'administrator_pages/home'
   end
