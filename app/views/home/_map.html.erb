@@ -330,9 +330,12 @@
     map.addControl(
         new mapboxgl.GeolocateControl({
             positionOptions: {
-                enableHighAccuracy: true
+                enableHighAccuracy: true,
+                timeout: 5000
             },
-            trackUserLocation: true
+            trackUserLocation: true,
+            showUserLocation: true,
+            showAccuracyCircle: true
         })
     );
 
