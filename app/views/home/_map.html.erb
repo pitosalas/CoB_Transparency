@@ -40,7 +40,7 @@
     </div>  
 </div>  
 
-<script>
+<script data-no-turbolink="true">
     
     $(".filter-group-toggle").click(function(){
         $(".toggleSwitch").toggleClass("close");      
@@ -50,7 +50,7 @@
 
     var sen = <%= raw render template: "sensors/index.json.jbuilder" %>
     var layerInfo = <%= raw render template: "home/index.json.jbuilder" %>
-    var neighborhood = 'https://gist.githubusercontent.com/nossu3751/3a92073b0333314e360185906d56772f/raw/3e86f1b621080aa431593b334114d4c0f9479b71/neighborhoods.geojson'
+    var neighborhood = <%= raw render template: "home/neighborhoods.json" %>
     var layer_ids = ["sensor_loc", "unclustered-point", "sensor_loc_count", "neighborhood_fill", "neighborhood_line"]
     var filterGroup = document.getElementById('filter-group');
     var infoClosed = true;
@@ -80,6 +80,7 @@
                 data: neighborhood
             });
         };
+
             
         if(map.getLayer("unclustered-point") == undefined){
             map.addLayer({
@@ -134,6 +135,21 @@
             })
         };
 
+        neighborhood_sensors = {};
+        
+        neighborhood.features.forEach(function(e){
+            name = e.properties.Name;
+            n_sensors = [];
+            content = "<table style='width:100%'><tr><th style='text-align:center'>Sensor ID</th><th style='text-align:center'>Sensor Type</th></tr>";
+            sen.features.forEach(function(s){
+                if(turf.inside(s,e)){
+                    n_sensors.push(s.properties.sensor_id);
+                    content += "<tr><td>" +  s.properties.sensor_id + "</td><td>" + s.properties.sensor_type + "</td></tr>"
+                }
+            });
+            neighborhood_sensors[name] = content;
+        });
+
         layerInfo.layers.forEach(function(li){
                 
             var liid= "#"+li.layerID;
@@ -163,23 +179,15 @@
 
     map.on('click', 'neighborhood_fill', function(e) {
         geocoder._removeMarker();
-
-        var sensorsWithin = []
-        var holo=e.features[0];
-
-        sen.features.forEach(function(s){
-            if(turf.inside(s,holo)){
-                sensorsWithin.push(s.properties.sensor_id)
-            }
-        })
-    
+        holo = e.features[0];
         $.ajax({
             success: function() {
                 $('.slider').toggleClass('close', infoClosed);
                 infoClosed = false;
+        
                 $('#searchInfo').html(                              
-                    "<p>Neighborhood Name: "+holo.properties.Name+ "</p><p> Number of Sensors in the Area: " +sensorsWithin.length + 
-                    "</p><p>Sensors in the Area: "+ sensorsWithin+"</p>"
+                    "<p><h1>" + holo.properties.Name + "</h1></p>" +
+                    neighborhood_sensors[holo.properties.Name]
                 );
                         
             }
@@ -288,7 +296,7 @@
 
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
-    console.log(geocoder.query("Boston"));
+    
 
     geocoder._inputEl.addEventListener('change',function(){
         $.ajax({
