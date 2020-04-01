@@ -11,13 +11,13 @@ require 'faker'
 require 'random/password'
 require 'csv'
 require 'open-uri'
+require 'activerecord-import'
 include RandomPassword
 
 Administrator.delete_all
-Point.delete_all
 Sensor.delete_all
-StudyArea.delete_all
 
+admin_columns = [:name, :emal, :password, :password_confirmation, :access_code, :activated, :activated_at]
 10.times do
   password = generate(16)
   Administrator.create!(name: Faker::Name.name, 
@@ -29,11 +29,14 @@ StudyArea.delete_all
                 activated_at: Time.zone.now)
 end
 
+sensors = []
+sensor_columns = [:sensor_id, :sensor_type, :ownership, :gov_owned, :datatype, :description, :longitude, :latitude, :location]
 sensor_csv_path = "./db/sensors.csv"
 # sensor_csv_path = "https://docs.google.com/spreadsheets/d/1I0PSo4PdN-8wFFn1vcPod5JvlXPhhZhyePiRVPIcHzI/gviz/tq?tqx=out:csv&sheet=sensors"
 #CSV.parse(open(sensor_csv_path), :headers=>true).each do |row|
 CSV.read(sensor_csv_path, :headers=>true).each do |row|
-  Sensor.create!(
+  # puts row
+  sensors << Sensor.new(
     sensor_id: row["sensor_id"], 
     sensor_type: row["sensor_type"], 
     ownership: row["ownership"],
@@ -41,22 +44,27 @@ CSV.read(sensor_csv_path, :headers=>true).each do |row|
     op_hrs: row["op_hrs"],
     datatype: row["datatype"],
     description: row["description"],
-    study_area_id: row["study_area_id"].to_i)
-end
-
-point_csv_path = "./db/points.csv"
-# point_csv_path = "https://docs.google.com/spreadsheets/d/1ThSurKMiB59TO90G6ThO5V7adagkE8L5IGXya9dFa2Y/gviz/tq?tqx=out:csv&sheet=points"
-# CSV.parse(open(point_csv_path), :headers=>true, encoding: "bom|utf-8").each do |row|
-CSV.read(point_csv_path, :headers=>true).each do |row|
-  Point.create!(
-    point_id: row["point_id"].to_i, 
-    point_type: row["point_type"], 
-    identifier: row["identifier"].to_i, 
     longitude: row["longitude"],
     latitude: row["latitude"],
-    location: row["location"],
-    ordering: row["ordering"].to_i)
+    location: row["location"])
 end
+
+Sensor.import sensor_columns, sensors
+
+
+# point_csv_path = "./db/points.csv"
+# # point_csv_path = "https://docs.google.com/spreadsheets/d/1ThSurKMiB59TO90G6ThO5V7adagkE8L5IGXya9dFa2Y/gviz/tq?tqx=out:csv&sheet=points"
+# # CSV.parse(open(point_csv_path), :headers=>true, encoding: "bom|utf-8").each do |row|
+# CSV.read(point_csv_path, :headers=>true).each do |row|
+#   Point.create!(
+#     point_id: row["point_id"].to_i, 
+#     point_type: row["point_type"], 
+#     identifier: row["identifier"].to_i, 
+#     longitude: row["longitude"],
+#     latitude: row["latitude"],
+#     location: row["location"],
+#     ordering: row["ordering"].to_i)
+# end
 
 
 
