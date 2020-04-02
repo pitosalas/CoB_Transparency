@@ -45,7 +45,7 @@ CSV.read(sensor_csv_path, :headers=>true).each do |row|
     datatype: row["datatype"],
     description: row["description"],
     longitude: row["longitude"],
-    latitude: row["latitude"],
+    latitude: row["latitude"].to_f,
     location: row["location"])
 end
 
