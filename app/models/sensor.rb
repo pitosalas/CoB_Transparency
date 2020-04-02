@@ -1,4 +1,5 @@
 class Sensor < ActiveRecord::Base 
+  include ActiveModel::Validations::Callbacks
   # belongs_to :study_area, optional: true
   # has_one :point, primary_key: :sensor_id, foreign_key: :identifier
 
@@ -13,4 +14,15 @@ class Sensor < ActiveRecord::Base
   # sensor_types = ["camera", "air quality", "induction loop", "counter"]
   # validates :sensor_type, 
   #           inclusion: { in: sensor_types}
+  def address
+    [street, "Boston", "Massachusetts", "United States"].compact.join(', ')
+  end
+
+  # if(:street != nil)
+  #   geocoded_by :address
+  #   after_validation :geocode
+  # else
+    reverse_geocoded_by :latitude, :longitude, :address => :location
+    after_validation :reverse_geocode 
+  
 end
