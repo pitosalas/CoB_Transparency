@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_27_014422) do
+ActiveRecord::Schema.define(version: 2020_04_02_012348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,38 +38,20 @@ ActiveRecord::Schema.define(version: 2020_03_27_014422) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "points", force: :cascade do |t|
-    t.integer "point_id"
-    t.string "point_type"
-    t.integer "identifier"
-    t.string "longitude"
-    t.string "latitude"
-    t.string "location"
-    t.integer "ordering"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "sensors", force: :cascade do |t|
-    t.integer "sensor_id"
+    t.string "sensor_id"
     t.string "sensor_type"
     t.string "ownership"
     t.string "gov_owned"
     t.string "op_hrs"
     t.string "datatype"
     t.string "description"
-    t.integer "study_area_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "study_areas", force: :cascade do |t|
-    t.integer "study_area_id"
-    t.string "name"
-    t.integer "sensor_count"
-    t.integer "point_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "location"
+    t.string "longitude"
+    t.string "latitude"
+    t.string "street"
   end
 
 end

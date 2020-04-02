@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get 'password_resets/new'
   get 'password_resets/edit'
   resources :feedbacks
-  resources :points
   get 'sessions/new'
   get 'administrators/new'
   root 'administrator_pages#home'
@@ -21,7 +20,6 @@ Rails.application.routes.draw do
   #root 'home#home'
   #get 'home/home'
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-  resources :study_areas
   resources :sensors
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

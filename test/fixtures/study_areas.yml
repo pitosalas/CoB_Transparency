@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  location: "40.741895,-73.989308"
-  radius: 2.5
-
-two:
-  location: "41.741895,-71.989308"
-  radius: 1.2
