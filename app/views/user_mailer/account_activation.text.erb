@@ -1,5 +1,5 @@
-Hi <%= @administrator.name %>,
+Hi <%= @user.name %>,
 
 Welcome to the CoB Transparency App! Click on the link below to activate your account:
 
-<%= edit_account_activation_url(@administrator.activation_token, email: @administrator.email) %>
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
