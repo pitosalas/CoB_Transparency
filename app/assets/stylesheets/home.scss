@@ -100,7 +100,7 @@
 .toggleSwitch {
   position: absolute;
   width: 35px;
-  height: 82px;
+  height: 240px;
   left: 10px;
   top: 50px;
   z-index: 1;
@@ -160,7 +160,7 @@
 }
 
 .toggleSwitch.close {
-  top: -32px;
+  top: -190px;
   background: rgba(255, 255, 255, 1);
   .filter-group-toggle {
     position: absolute;

@@ -54,6 +54,7 @@
     var layer_ids = ["sensor_loc", "unclustered-point", "sensor_loc_count", "neighborhood_fill", "neighborhood_line"]
     var filterGroup = document.getElementById('filter-group');
     var infoClosed = true;
+    var sensor_list = ['camera','air_quality','other_sensor','counter','antenna'];
         
     var map = new mapboxgl.Map({
         container: 'map',
@@ -81,32 +82,90 @@
             });
         };
 
-            
-        if(map.getLayer("unclustered-point") == undefined){
+        circle_radius = [
+            "interpolate", ["linear"], ["zoom"],               
+            11, 1.5,
+            13, 3,
+            15, 5,
+            18, 7,
+            20, 9
+        ]  
+
+        if(map.getLayer("camera") == undefined){
             map.addLayer({
-                id: 'unclustered-point',
+                id: 'camera',
                 type: 'circle',
-                source: 'sensor_loc',                  
-                paint: {
-                    'circle-color': [ 
-                        'match',
-                        ['get','sensor_type'],
-                        'camera',
-                        '#11b4da',
-                        'counter',
-                        '#fb4d42',
-                        '#d7d3c1' 
-                    ],      
-                    'circle-radius': [
-                        "interpolate", ["linear"], ["zoom"],               
-                        11, 1.5,
-                        13, 3,
-                        15, 5,
-                        18, 7,
-                        20, 9
-                    ]   
+                source: 'sensor_loc',
+                filter: ['==', 'sensor_type', 'camera'],
+                paint:{
+                    'circle-color':'#11b4da',
+                    'circle-radius': circle_radius
                 }
-            })
+            });
+        };
+
+        if(map.getLayer("antenna") == undefined){
+            map.addLayer({
+                id: 'antenna',
+                type: 'circle',
+                source: 'sensor_loc',
+                filter: ['==', 'sensor_type', 'antenna'],
+                paint:{
+                    'circle-color':'#0fc71f',
+                    'circle-radius': circle_radius
+                }
+            });
+        };
+
+        if(map.getLayer("counter") == undefined){
+            map.addLayer({
+                id: 'counter',
+                type: 'circle',
+                source: 'sensor_loc',
+                filter: ['==', 'sensor_type', 'counter'],
+                paint:{
+                    'circle-color':'#fb4d42',
+                    'circle-radius': circle_radius
+                }
+            });
+        };
+        
+        if(map.getLayer("air_quality") == undefined){
+            map.addLayer({
+                id: 'air_quality',
+                type: 'circle',
+                source: 'sensor_loc',
+                filter: ['==', 'sensor_type', 'air quality'],
+                paint:{
+                    'circle-color':'#b23ff3',
+                    'circle-radius': circle_radius
+                }
+            });
+        };
+            
+        if(map.getLayer("other_sensor") == undefined){
+            map.addLayer({
+               id: 'other_sensor',
+                type: 'circle',
+                source: 'sensor_loc', 
+                filter: ["all",
+                    ['!=', 'sensor_type','air quality'],
+                    ['!=', 'sensor_type','camera'],
+                    ['!=', 'sensor_type','antenna'],
+                    ['!=', 'sensor_type','counter']
+                ],                 
+                 paint: {
+                     'circle-color': '#d7d3c1',      
+                     'circle-radius': [
+                         "interpolate", ["linear"], ["zoom"],               
+                         11, 1.5,
+                         13, 3,
+                         15, 5,
+                         18, 7,
+                         20, 9
+                     ]   
+                 }
+             })
         };
             
         if(map.getLayer("neighborhood_fill") == undefined){
@@ -202,33 +261,34 @@
     map.on('mouseleave', 'neighborhood_fill', function() {
         map.getCanvas().style.cursor = '';
     });
+    sensor_list.forEach(function(s){
+        map.on('click', s, function(e) {
+            
+            geocoder._removeMarker();
+            var holo=e.features[0];
+            map.flyTo({center: holo.geometry.coordinates});
+            var path = '/sensors/'+holo.properties.id + '.html';
 
-    map.on('click', 'unclustered-point', function(e) {
-        
-        geocoder._removeMarker();
-        var holo=e.features[0];
-        map.flyTo({center: holo.geometry.coordinates});
-        var path = '/sensors/'+holo.properties.id + '.html';
-
-        var defaultMarkerOptions = {
-            color: '#FB4D42'
-        }
-        var markerOptions = $.extend({}, defaultMarkerOptions, geocoder.options.marker)
-        geocoder.mapMarker = new geocoder._mapboxgl.Marker(markerOptions);
-        geocoder.mapMarker.setLngLat(holo.geometry.coordinates).addTo(geocoder._map);
-
-        $.ajax({
-            success: function() {
-                $('.slider').toggleClass('close', infoClosed);
-                infoClosed = false;
-
-                $("#searchInfo").load(path + " .content-container");
-
-            },
-            error:function(){
-                alert('Error');
+            var defaultMarkerOptions = {
+                color: '#FB4D42'
             }
-        })
+            var markerOptions = $.extend({}, defaultMarkerOptions, geocoder.options.marker)
+            geocoder.mapMarker = new geocoder._mapboxgl.Marker(markerOptions);
+            geocoder.mapMarker.setLngLat(holo.geometry.coordinates).addTo(geocoder._map);
+
+            $.ajax({
+                success: function() {
+                    $('.slider').toggleClass('close', infoClosed);
+                    infoClosed = false;
+
+                    $("#searchInfo").load(path + " .content-container");
+
+                },
+                error:function(){
+                    alert('Error');
+                }
+            })
+        });
     });
 
     map.on('mouseenter', 'unclustered-point', function() {
