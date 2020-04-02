@@ -14,13 +14,13 @@ require 'open-uri'
 require 'activerecord-import'
 include RandomPassword
 
-Administrator.delete_all
+User.delete_all
 Sensor.delete_all
 
-admin_columns = [:name, :emal, :password, :password_confirmation, :access_code, :activated, :activated_at]
+user_columns = [:name, :emal, :password, :password_confirmation, :access_code, :activated, :activated_at]
 10.times do
   password = generate(16)
-  Administrator.create!(name: Faker::Name.name, 
+  User.create!(name: Faker::Name.name, 
                 email: Faker::Internet.email, 
                 password: password, 
                 password_confirmation: password, 

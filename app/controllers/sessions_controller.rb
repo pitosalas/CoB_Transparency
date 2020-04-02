@@ -3,11 +3,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    administrator = Administrator.find_by(email: params[:session][:email].downcase)
-    if administrator && administrator.authenticate(params[:session][:password])
-      if administrator.activated?
-        log_in administrator
-        params[:session][:remember_me] == '1' ? remember(administrator) : forget(administrator)
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      if user.activated?
+        log_in user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         redirect_to '/admin'
       else
         message  = "Account not activated. "

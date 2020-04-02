@@ -85,6 +85,7 @@ GEM
       sassc (>= 2.0.0)
     builder (3.2.4)
     byebug (11.1.1)
+    cancan (1.6.10)
     cancancan (3.1.0)
     capybara (3.31.0)
       addressable
@@ -360,6 +361,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bootstrap-sass (= 3.4.1)
   byebug
+  cancan
   cancancan
   capybara (>= 2.15)
   faker

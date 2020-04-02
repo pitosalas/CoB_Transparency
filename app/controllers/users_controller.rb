@@ -1,17 +1,17 @@
-class AdministratorsController < ApplicationController
+class UsersController < ApplicationController
   def index
-    @administrator = Administrator.all
+    @user = User.all
   end
   def show
-    @administrator = Administrator.find(params[:id])
+    @user = User.find(params[:id])
   end
   def new
-    @administrator = Administrator.new
+    @user = User.new
   end
   def create
-    @administrator = Administrator.new(administrator_params)
-    if @administrator.save 
-      @administrator.send_activation_email
+    @user = User.new(user_params)
+    if @user.save 
+      @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to login_path
       #log_in @administrator
@@ -24,8 +24,8 @@ class AdministratorsController < ApplicationController
   end
   private
 
-    def administrator_params
-      params.require(:administrator).permit(:name, :email, :password,
+    def user_params
+      params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation, :access_code)
     end
 end

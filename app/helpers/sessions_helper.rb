@@ -1,50 +1,50 @@
 module SessionsHelper
 
   # Logs in the given user.
-  def log_in(administrator)
-    session[:administrator_id] = administrator.id
+  def log_in(user)
+    session[:user] = user.id
   end
 
     # Remembers a user in a persistent session.
-  def remember(administrator)
-    administrator.remember
-    cookies.permanent.encrypted[:administrator_id] = administrator.id
-    cookies.permanent[:remember_token] = administrator.remember_token
+  def remember(user)
+    user.remember
+    cookies.permanent.encrypted[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
   end
   # Returns the user corresponding to the remember token cookie.
-  def current_administrator
-    if (administrator_id = session[:administrator_id])
-      @current_administrator ||= Administrator.find_by(id: administrator_id)
-    elsif (administrator_id = cookies.encrypted[:administrator_id])
-      administrator = Administrator.find_by(id: administrator_id)
-      if administrator && administrator.authenticated?(:remember, cookies[:remember_token])
-        log_in administrator
-        @current_administrator = administrator
+  def current_user
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+    elsif (user_id = cookies.encrypted[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(:remember, cookies[:remember_token])
+        log_in user
+        @current_user = user
       end
     end
   end
 
    # Returns true if the user is logged in, false otherwise.
    def logged_in?
-    !current_administrator.nil?
+    !current_user.nil?
   end
     # Logs out the current user.
     def log_out
-      session.delete(:administrator_id)
-      @current_administrator = nil
+      session.delete(:user_id)
+      @current_user = nil
     end
 
     # Forgets a persistent session.
-  def forget(administrator)
-    administrator.forget
-    cookies.delete(:administrator_id)
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
 
   # Logs out the current user.
   def log_out
-    forget(current_administrator)
-    session.delete(:administrator_id)
-    @current_administrator = nil
+    forget(current_user)
+    session.delete(:user_id)
+    @current_user = nil
   end
 end

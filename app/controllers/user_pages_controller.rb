@@ -1,11 +1,11 @@
-class AdministratorPagesController < ApplicationController
+class UserPagesController < ApplicationController
   def home
 
         #@gj = GeoJson.new(Sensor.all)
         #@sa = GeoJson.new(@sa.to_points)
         @sensors = Sensor.all
         @layerInfo = layerInfoBuilder
-        render 'administrator_pages/home'
+        render 'user_pages/home'
   end
 
   def help
@@ -14,7 +14,7 @@ class AdministratorPagesController < ApplicationController
   end
 
   def about
-    render 'administrator_pages/about'
+    render 'user_pages/about'
   end
 
   def contact

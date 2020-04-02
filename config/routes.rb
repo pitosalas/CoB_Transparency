@@ -3,17 +3,17 @@ Rails.application.routes.draw do
   get 'password_resets/edit'
   resources :feedbacks
   get 'sessions/new'
-  get 'administrators/new'
-  root 'administrator_pages#home'
+  get 'users/new'
+  root 'user_pages#home'
   #get 'administrator_pages/home'
-  get  '/help',    to: 'administrator_pages#help'
-  get  '/about',   to: 'administrator_pages#about'
-  get  '/contact', to: 'administrator_pages#contact'
-  get  '/signup',  to: 'administrators#new'
+  get  '/help',    to: 'user_pages#help'
+  get  '/about',   to: 'user_pages#about'
+  get  '/contact', to: 'user_pages#contact'
+  get  '/signup',  to: 'users#new'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  resources :administrators
+  resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
 

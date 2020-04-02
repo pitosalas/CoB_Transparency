@@ -1,4 +1,5 @@
 RailsAdmin.config do |config|
+  config.parent_controller = 'ApplicationController'
 
   ### Popular gems integration
 
@@ -9,7 +10,8 @@ RailsAdmin.config do |config|
   # config.current_user_method(&:current_user)
 
   ## == CancanCan ==
-  # config.authorize_with :cancancan
+  config.authorize_with :cancancan
+  config.current_user_method(&:current_user)
 
   ## == Pundit ==
   # config.authorize_with :pundit
