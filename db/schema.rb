@@ -10,12 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_003825) do
+ActiveRecord::Schema.define(version: 2020_04_02_012348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "administrators", force: :cascade do |t|
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "issue"
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sensors", force: :cascade do |t|
+    t.string "sensor_id"
+    t.string "sensor_type"
+    t.string "ownership"
+    t.string "gov_owned"
+    t.string "op_hrs"
+    t.string "datatype"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "location"
+    t.string "longitude"
+    t.string "latitude"
+    t.string "street"
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
@@ -28,63 +51,7 @@ ActiveRecord::Schema.define(version: 2020_04_02_003825) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
-    t.index ["email"], name: "index_administrators_on_email", unique: true
-  end
-
-  create_table "feedbacks", force: :cascade do |t|
-    t.string "issue"
-    t.string "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "points", force: :cascade do |t|
-    t.integer "point_id"
-    t.string "point_type"
-    t.integer "identifier"
-    t.string "longitude"
-    t.string "latitude"
-    t.string "location"
-    t.integer "ordering"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "sensors", force: :cascade do |t|
-    t.integer "sensor_id"
-    t.string "sensor_type"
-    t.string "ownership"
-    t.string "gov_owned"
-    t.string "op_hrs"
-    t.string "datatype"
-    t.string "description"
-    t.integer "study_area_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "location"
-    t.float "longitude"
-    t.float "latitude"
-    t.string "street"
-  end
-
-  create_table "study_areas", force: :cascade do |t|
-    t.integer "study_area_id"
-    t.string "name"
-    t.integer "sensor_count"
-    t.integer "point_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "email", null: false
-    t.string "encrypted_password", limit: 128, null: false
-    t.string "confirmation_token", limit: 128
-    t.string "remember_token", limit: 128, null: false
-    t.index ["email"], name: "index_users_on_email"
-    t.index ["remember_token"], name: "index_users_on_remember_token"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
