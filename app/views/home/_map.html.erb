@@ -12,9 +12,14 @@
 
 <div id='map'></div>
 <div class = "geocoder" id ="geocoder"></div>
-<div class = "toggleSwitch close">
+
+<div class = "toggleSwitch">
     <nav id="filter-group" class="filter-group" id="toggle-buttons"></nav>
     <div class = "filter-group-toggle"></div>
+</div>
+
+<div class = "view-change">
+    <%= image_tag "satellite-dish.svg", size: "21x21", class: "custom-icons" %>
 </div>
 
 <div class="slider close">
@@ -55,10 +60,15 @@
     var filterGroup = document.getElementById('filter-group');
     var infoClosed = true;
     var sensor_list = ['camera','air_quality','other_sensor','counter','antenna'];
+    var style_index = 0;
+    var map_style = [
+        'mapbox://styles/nossu3751/ck757utxk36gn1io7vjmmmrnh',
+        'mapbox://styles/nossu3751/ck8l8v9010hj41jo06o6r9673'
+    ];
         
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/nossu3751/ck757utxk36gn1io7vjmmmrnh/draft',
+        style: 'mapbox://styles/nossu3751/ck757utxk36gn1io7vjmmmrnh',
         center: [-71.057991, 42.360405],
         zoom: 10,
         minZoom: 10,
@@ -67,7 +77,7 @@
     });
 
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    map.on('load', function() {
+    map.on('style.load', function() {
         if(map.getSource("sensor_loc") == undefined){
             map.addSource('sensor_loc', {
                 type: 'geojson',
@@ -261,6 +271,7 @@
     map.on('mouseleave', 'neighborhood_fill', function() {
         map.getCanvas().style.cursor = '';
     });
+
     sensor_list.forEach(function(s){
         map.on('click', s, function(e) {
             
@@ -323,6 +334,12 @@
                 })
             }
         }) 
+    });
+
+    $('.view-change').click(function(){
+        $('.view-change').toggleClass('clicked');
+        style_index = (style_index == 0)?1:0;
+        map.setStyle(map_style[style_index]);
     });
 
     var forwardGeocoder =(query)=> {
