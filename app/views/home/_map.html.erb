@@ -110,6 +110,9 @@
                 paint:{
                     'circle-color':'#11b4da',
                     'circle-radius': circle_radius
+                },
+                layout:{
+                    visibility: 'visible'
                 }
             });
         };
@@ -123,6 +126,9 @@
                 paint:{
                     'circle-color':'#0fc71f',
                     'circle-radius': circle_radius
+                },
+                layout:{
+                    visibility: 'visible'
                 }
             });
         };
@@ -136,6 +142,9 @@
                 paint:{
                     'circle-color':'#fb4d42',
                     'circle-radius': circle_radius
+                },
+                layout:{
+                    visibility: 'visible'
                 }
             });
         };
@@ -149,6 +158,9 @@
                 paint:{
                     'circle-color':'#b23ff3',
                     'circle-radius': circle_radius
+                },
+                layout:{
+                    visibility: 'visible'
                 }
             });
         };
@@ -174,7 +186,10 @@
                          18, 7,
                          20, 9
                      ]   
-                 }
+                 },
+                 layout:{
+                    visibility: 'visible'
+                }
              })
         };
             
@@ -187,6 +202,9 @@
                 'paint': {
                     'fill-color': '#f27373',
                     'fill-opacity': 0.1
+                },
+                layout:{
+                    visibility: 'visible'
                 }
             })
         };
@@ -200,6 +218,9 @@
                     'line-color': 'rgba(255, 0, 0, 1)',
                     'line-width': 3,
                     'line-opacity': 0.2
+                },
+                layout:{
+                    visibility: 'visible'
                 }
             })
         };
@@ -220,29 +241,40 @@
         });
 
         layerInfo.layers.forEach(function(li){
-                
             var liid= "#"+li.layerID;
-                
             if((filterGroup.querySelector(liid) == null)){
-                var input = document.createElement('input');
-                input.type = 'checkbox';
-                input.id = li.layerID;
-                input.checked = true;
-                filterGroup.appendChild(input);
+ 
+                var img = document.createElement('img');
+                img.src = 'assets/' + li.layerID + '.svg';
+                img.className = 'toggle_icon_img';
 
-                var label = document.createElement('label');
-                label.setAttribute('for', li.layerID);
-                label.textContent = li.layerName;
-                filterGroup.appendChild(label);
+                var divElem = document.createElement('div');
+                divElem.className = 'toggle_icon clicked';
+                divElem.id = li.layerID;
+                divElem.appendChild(img);
 
-                input.addEventListener('change', function(e) {
+                filterGroup.appendChild(divElem);
+
+                divElem.addEventListener('click', function(e){
+                    var visibility = map.getLayoutProperty(li.layerID,'visibility');
                     map.setLayoutProperty(
                         li.layerID,
                         'visibility',
-                        e.target.checked ? 'visible' : 'none'
+                        (visibility == 'visible') ? 'none' : 'visible'
                     );
+                    if(visibility == 'visible'){    
+                        $("#"+li.layerID).removeClass('clicked');
+                    }else{
+                        $("#"+li.layerID).addClass('clicked');
+                    }
                 });
-            }               
+
+            }else{
+                if(!$("#"+li.layerID).hasClass('clicked')){
+                    $("#"+li.layerID).addClass('clicked');
+                } 
+            }
+                           
         });         
     });
 

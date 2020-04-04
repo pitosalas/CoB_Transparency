@@ -124,7 +124,7 @@
   width: 29px;
   height: 205px;
   left: 10px;
-  top: 50px;
+  top: 55px;
   z-index: 1;
   color: black;
   background-color: transparent;
@@ -132,14 +132,14 @@
 }
 
 .toggleSwitch.close {
-  top: -160px;
+  top: -170px;
 }
 
 .filter-group-toggle {
   position: absolute;
   width: 29px;
   height: 29px;
-  bottom: -45px;
+  bottom: -55px;
   z-index: 1;
   background: rgba(219, 116, 108, 1);
   border-radius: 0 0 8px 8px;
@@ -148,7 +148,7 @@
 }
 
 .filter-group {
-  position: relative;
+  position: absolute;
   top: 0px;
   margin-top: 10px;
   left: 0px;
@@ -160,11 +160,20 @@
 
 .toggle_icon{
   position: relative;
+  margin-top:7px;
+  z-index: 2;
+  bottom: 10px;
   width: 29px;
   height: 29px;
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+
+.toggle_icon.clicked{
+  box-shadow: 0 0 2px 2px rgba(0, 150, 255, 1);
+  background-color: rgb(188, 227, 243);
 }
 
 .toggle_icon_img{
