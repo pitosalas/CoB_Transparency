@@ -180,10 +180,8 @@ h1.about{
   font-weight: 700;
   letter-spacing: -1px;
 }
-.timeline-step-wrapper .timeline-number, h1, h2 {
-  letter-spacing: -1px;
-}
-.modal-cta, .status-message-title, .timeline-step-wrapper .step-text, .timeline-step-wrapper .step-title, .timeline-step-wrapper .timeline-number, .view-transactions-main-transactions .view-header p, address, h1, h2, h3, h4, h5, h6 {
+
+h1, h2{
   font-family: Montserrat,sans-serif;
   color: #091f2f;
   text-transform: uppercase;
@@ -198,6 +196,15 @@ h1.about{
   padding-right: 10px;
   padding-left: 10px;
 }
+.headshot{
+  display: block;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 16px;
+  margin-right: 1rem;
+}
 
 /* Create two unequal columns that floats next to each other */
 .column {
@@ -205,16 +212,23 @@ h1.about{
 }
 
 .right {
+  margin-top:40px;
   float:right;
   width: 25%;
   padding: 30px;
+  .transparencylogo{
+    max-width: 100%;
+    height: auto;
+  }
 }
 .outlined{
-  border: 5px solid #E0E0E0;
+  border: 3px solid #E0E0E0;
 }
 
 .left {
-  width: 75%;
+  width: 72%;
+  border: 3px solid #E0E0E0;
+  padding: 10px;
 }
 
 h2.aboutcolumn{
@@ -314,11 +328,7 @@ a.number{
 * {
   box-sizing: border-box;
 }
-.g--1:nth-child(1n) {
-  margin-right: 24px;
-  margin-right: 1.5rem;
-  margin-left: 0;
-}
+
 .cdp {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -346,16 +356,6 @@ a.number{
 }
 .contextual-region {
   position: relative;
-}
-
-.cdp-i {  /*for headshots*/
-  display: block;
-  width: 110px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 100%;
-  margin-right: 16px;
-  margin-right: 1rem;
 }
 
 .cdp-l:hover {
