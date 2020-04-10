@@ -33,27 +33,27 @@
 .slider {
   position: absolute;
   z-index: 2;
-  margin: 0;
   width: 100%;
-  height: 50%;
+  height: 40%;
   bottom: 0;
   overflow: hidden;
   background-color: transparent;
   color: black;
   transition: height 0.15s;
-
+  pointer-events: none;
   .rounded-box {
     position: absolute;
+    pointer-events:auto;
     border-radius: 25px 25px 0 0;
+    top: 50px;
     padding: 2%;
     width: 100%;
     height: 100%;
-    top:50px;
     left: 0%;
-    background-color: rgba(250, 250, 250, 0.6);
-    box-shadow: 0px -1.5px 10px rgba(0, 0, 0, 0.3);
-    backdrop-filter:blur(6.5px);
-    -webkit-backdrop-filter:blur(6.5px);
+    background-color: rgba(250, 250, 250, 0.7);
+    box-shadow: 0px -1.5px 10px rgba(0, 0, 0, 0.15);
+    backdrop-filter:blur(5.5px);
+    -webkit-backdrop-filter:blur(5.5px);
     #searchInfo {
       position: relative;
       height: 50%;
@@ -62,6 +62,7 @@
       padding-right: 15px;
       overflow-y: scroll;
       overflow-x: hidden;
+      line-height: 1.6em;
     }
 
     // .feedback-area{
@@ -152,7 +153,7 @@
 .filter-group {
   position: absolute;
   top: 0px;
-  margin-top: 10px;
+  margin-top: 9px;
   left: 0px;
   z-index: 1;
   border-radius: 4px;
@@ -170,18 +171,19 @@
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 
 .toggle_icon.clicked{
-  box-shadow: 0 0 2px 2px rgba(0, 150, 255, 1);
+  box-shadow: 0 0 0px 2px rgba(42, 166, 255, 0.5);
   background-color: rgb(188, 227, 243);
 }
 
 .toggle_icon_img{
-  width: 21px;
-  height: 21px;
-  padding-top: 4px;
+  width: 25px;
+  height: 25px;
+  padding-top: 3px;
 }
 
 
@@ -195,7 +197,7 @@
   height: 29px;
   border-radius: 4px;
   padding-top: 5px;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
   background-color: rgb(116, 116, 116);
 }
 
@@ -212,7 +214,19 @@
   top: 50px;
 }
 
+//data loaded onto infobar
+
+.show-page{
+  pointer-events: none;
+}
+
+.container{
+  pointer-events:auto;
+}
+
 // mapbox geocoder
+
+
 
 .mapboxgl-ctrl-geocoder,
 .mapboxgl-ctrl-geocoder *,
@@ -405,7 +419,7 @@ h2 {
 
 p {
   font-size: 1.1em;
-  line-height: 1.7em;
+  line-height: 200%;
 }
 
 hr {

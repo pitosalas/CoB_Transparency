@@ -237,7 +237,7 @@
                     content += "<tr><td>" +  s.properties.sensor_id + "</td><td>" + s.properties.sensor_type + "</td></tr>"
                 }
             });
-            neighborhood_sensors[name] = content;
+            neighborhood_sensors[name] = [content, n_sensors];
         });
 
         layerInfo.layers.forEach(function(li){
@@ -285,12 +285,18 @@
             success: function() {
                 $('.slider').toggleClass('close', infoClosed);
                 infoClosed = false;
-        
-                $('#searchInfo').html(                              
-                    "<p><h1>" + holo.properties.Name + "</h1></p>" +
-                    neighborhood_sensors[holo.properties.Name]
-                );
-                        
+                sensors_inside = neighborhood_sensors[holo.properties.Name];
+                if(sensors_inside[1].length != 0){
+                    $('#searchInfo').html(                              
+                        "<p><h1>" + holo.properties.Name + "</h1></p>" +
+                        neighborhood_sensors[holo.properties.Name][0]
+                    );
+                }else{
+                    $('#searchInfo').html(                              
+                        "<p><h1>" + holo.properties.Name + "</h1></p>" +
+                        "<p> Sorry! We don't have any sensors here yet. </p>"
+                    );
+                }           
             }
         })      
     });
@@ -324,7 +330,7 @@
                     $('.slider').toggleClass('close', infoClosed);
                     infoClosed = false;
 
-                    $("#searchInfo").load(path + " .content-container");
+                    $("#searchInfo").load(path+ " .show-page");
 
                 },
                 error:function(){
@@ -419,7 +425,7 @@
                 if(geocoder._typeahead.selected.place_type == "sensor"){
                     var path = '/sensors/'+ geocoder._typeahead.selected.properties.id + '.html';
 
-                    $("#searchInfo").load(path + " .content-container");
+                    $("#searchInfo").load(path + " .show-page");
                 
                 }else{
                     $('#searchInfo').html(
