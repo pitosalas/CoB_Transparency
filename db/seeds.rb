@@ -30,7 +30,7 @@ admin_columns = [:name, :emal, :password, :password_confirmation, :access_code, 
 end
 
 sensors = []
-sensor_columns = [:sensor_id, :sensor_type, :ownership, :gov_owned, :datatype, :description, :longitude, :latitude, :location]
+sensor_columns = [:sensor_id, :sensor_type, :owner, :description, :longitude, :latitude, :location]
 sensor_csv_path = "./db/sensors.csv"
 # sensor_csv_path = "https://docs.google.com/spreadsheets/d/1I0PSo4PdN-8wFFn1vcPod5JvlXPhhZhyePiRVPIcHzI/gviz/tq?tqx=out:csv&sheet=sensors"
 #CSV.parse(open(sensor_csv_path), :headers=>true).each do |row|
@@ -39,10 +39,7 @@ CSV.read(sensor_csv_path, :headers=>true).each do |row|
   sensors << Sensor.new(
     sensor_id: row["sensor_id"], 
     sensor_type: row["sensor_type"], 
-    ownership: row["ownership"],
-    gov_owned: row["gov_owned"], 
-    op_hrs: row["op_hrs"],
-    datatype: row["datatype"],
+    owner: row["owner"],
     description: row["description"],
     longitude: row["longitude"],
     latitude: row["latitude"].to_f,

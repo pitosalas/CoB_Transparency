@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_003825) do
+ActiveRecord::Schema.define(version: 2020_04_10_181128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,12 +41,8 @@ ActiveRecord::Schema.define(version: 2020_04_02_003825) do
   create_table "sensors", force: :cascade do |t|
     t.string "sensor_id"
     t.string "sensor_type"
-    t.string "ownership"
-    t.string "gov_owned"
-    t.string "op_hrs"
-    t.string "datatype"
+    t.string "owner"
     t.string "description"
-    t.integer "study_area_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "location"

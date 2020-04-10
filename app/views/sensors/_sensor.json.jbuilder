@@ -11,12 +11,8 @@ json.features @sensors.each do |sensor|
     end
     json.set! :property do
         json.set! :sensor_type, sensor.sensor_type
-        json.set! :ownership, sensor.ownership
-        json.set! :boolean, sensor.gov_owned
-        json.set! :op_hrs, sensor.op_hrs
-        json.set! :datatype, sensor.datatype
+        json.set! :ownership, sensor.owner
         json.set! :description, sensor.description
-        json.set! :study_area_id, sensor.study_area_id
     end
 end
 
