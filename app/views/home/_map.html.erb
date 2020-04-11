@@ -317,8 +317,6 @@
             geocoder._removeMarker();
             var holo=e.features[0];
             map.flyTo({center: holo.geometry.coordinates});
-            var path = '/sensors/'+holo.properties.id + '.json';
-            var json_path = $.getJSON(path);
             var defaultMarkerOptions = {
                 color: '#FB4D42'
             }
@@ -427,9 +425,12 @@
                     return;
                 }
                 if(geocoder._typeahead.selected.place_type == "sensor"){
-                    var path = '/sensors/'+ geocoder._typeahead.selected.properties.id + '.html';
-
-                    $("#searchInfo").load(path + " .show-page");
+        
+                    $.ajax({
+                        url:"/sensor_info",
+                        type: "GET",
+                        data: {si: geocoder._typeahead.selected.properties.id}
+                    });
                 
                 }else{
                     $('#searchInfo').html(
