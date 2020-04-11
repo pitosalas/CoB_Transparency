@@ -332,7 +332,7 @@
                     $.ajax({
                         url:"/sensor_info",
                         type: "GET",
-                        data: {si: holo.properties.id}
+                        data: {si: holo.properties.sensor_id}
                     });
                 },
                 error:function(){
@@ -429,7 +429,7 @@
                     $.ajax({
                         url:"/sensor_info",
                         type: "GET",
-                        data: {si: geocoder._typeahead.selected.properties.id}
+                        data: {si: geocoder._typeahead.selected.properties.sensor_id}
                     });
                 
                 }else{
