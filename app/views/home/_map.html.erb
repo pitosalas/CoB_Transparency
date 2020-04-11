@@ -309,15 +309,16 @@
     map.on('mouseleave', 'neighborhood_fill', function() {
         map.getCanvas().style.cursor = '';
     });
-
+    
+    
     sensor_list.forEach(function(s){
         map.on('click', s, function(e) {
             
             geocoder._removeMarker();
             var holo=e.features[0];
             map.flyTo({center: holo.geometry.coordinates});
-            var path = '/sensors/'+holo.properties.id + '.html';
-
+            var path = '/sensors/'+holo.properties.id + '.json';
+            var json_path = $.getJSON(path);
             var defaultMarkerOptions = {
                 color: '#FB4D42'
             }
@@ -330,8 +331,11 @@
                     $('.slider').toggleClass('close', infoClosed);
                     infoClosed = false;
 
-                    $("#searchInfo").load(path+ " .show-page");
-
+                    $.ajax({
+                        url:"/sensor_info",
+                        type: "GET",
+                        data: {si: holo.properties.id}
+                    });
                 },
                 error:function(){
                     alert('Error');

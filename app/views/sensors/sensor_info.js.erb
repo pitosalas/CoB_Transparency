@@ -1,0 +1,15 @@
+$('#searchInfo').html(
+    '<div class = "id_info">' + 
+        '"' + 'Sensor ' + '<%= j @sensor.sensor_id %>' + '"' +
+    '</div>'
+);
+$('#searchInfo').append(
+    '<div class = "type_info">' +
+        '<%= j @sensor.sensor_type %>' +
+    '</div>'
+);
+$('#searchInfo').append(
+    '<div class = "location_info">' +
+        '<%= j @sensor.location %>' +
+    '</div>'
+);
