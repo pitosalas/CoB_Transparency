@@ -13,3 +13,25 @@ $('#searchInfo').append(
         '<%= j @sensor.location %>' +
     '</div>'
 );
+<% if @sensor.owner != nil %>
+    $('#searchInfo').append(
+        '<div class = "owner_info">' +
+            '<%= j @sensor.owner%>' +
+        '</div>'
+    );
+<% else %>
+    $('#searchInfo').append(
+        '<div class = "owner_info">' +
+            'Owner: ' + 'Owner not specified.' +
+        '</div>'
+    );
+<% end %>
+<% if @sensor.description != nil %>
+    $('#searchInfo').append(
+        '<div class = "description_info">' +
+            '<%= j @sensor.description %>' +
+        '</div>'
+    );
+<% end %>
+
+
