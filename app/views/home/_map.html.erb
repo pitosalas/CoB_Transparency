@@ -360,6 +360,10 @@
                     $('#expandthis').text("See More");
                 }
                 infoClosed = true;
+                if($('.feedback-area').hasClass('reviewed')){
+                    $('.feedback-area').removeClass('reviewed');
+                    $('.feedback-area').html("<%= j render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>")
+                }
             }
         })
         
@@ -441,6 +445,7 @@
             }
         });
     });
+
 
 
     function fly(coord) {
