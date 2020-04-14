@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'administrators/new'
   root 'administrator_pages#home'
   #get 'administrator_pages/home'
+  get 'sensor_info' => 'sensors#sensor_info'
   get  '/help',    to: 'administrator_pages#help'
   get  '/about',   to: 'administrator_pages#about'
   get  '/contact', to: 'administrator_pages#contact'

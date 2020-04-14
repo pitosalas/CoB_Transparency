@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_012348) do
+ActiveRecord::Schema.define(version: 2020_04_10_181128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_04_02_012348) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_administrators_on_email", unique: true
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -41,16 +41,13 @@ ActiveRecord::Schema.define(version: 2020_04_02_012348) do
   create_table "sensors", force: :cascade do |t|
     t.string "sensor_id"
     t.string "sensor_type"
-    t.string "ownership"
-    t.string "gov_owned"
-    t.string "op_hrs"
-    t.string "datatype"
+    t.string "owner"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "location"
-    t.string "longitude"
-    t.string "latitude"
+    t.float "longitude"
+    t.float "latitude"
     t.string "street"
   end
 

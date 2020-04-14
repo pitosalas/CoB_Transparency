@@ -27,14 +27,14 @@
 
     <div class = "text-center">
         <button id="expandthis" class="btn btn-info ">See More</button>
-        <button id="exitthis" class="btn btn-primary ">Close</button>
+        <button id="exitthis" class="btn btn-danger ">Close</button>
     </div>
 
-    <hr>
+    
     
     <div id="searchInfo" data-turbolinks="false"></div>
     
-    <hr>
+    <p></p>
 
     <div class = "container">
         <div class = "feedback-area">
@@ -237,7 +237,7 @@
                     content += "<tr><td>" +  s.properties.sensor_id + "</td><td>" + s.properties.sensor_type + "</td></tr>"
                 }
             });
-            neighborhood_sensors[name] = content;
+            neighborhood_sensors[name] = [content, n_sensors];
         });
 
         layerInfo.layers.forEach(function(li){
@@ -285,12 +285,18 @@
             success: function() {
                 $('.slider').toggleClass('close', infoClosed);
                 infoClosed = false;
-        
-                $('#searchInfo').html(                              
-                    "<p><h1>" + holo.properties.Name + "</h1></p>" +
-                    neighborhood_sensors[holo.properties.Name]
-                );
-                        
+                sensors_inside = neighborhood_sensors[holo.properties.Name];
+                if(sensors_inside[1].length != 0){
+                    $('#searchInfo').html(                              
+                        "<p><h1>" + holo.properties.Name + "</h1></p>" +
+                        neighborhood_sensors[holo.properties.Name][0]
+                    );
+                }else{
+                    $('#searchInfo').html(                              
+                        "<p><h1>" + holo.properties.Name + "</h1></p>" +
+                        "<p> Sorry! We don't have any sensors here yet. </p>"
+                    );
+                }           
             }
         })      
     });
@@ -303,15 +309,14 @@
     map.on('mouseleave', 'neighborhood_fill', function() {
         map.getCanvas().style.cursor = '';
     });
-
+    
+    
     sensor_list.forEach(function(s){
         map.on('click', s, function(e) {
             
             geocoder._removeMarker();
             var holo=e.features[0];
             map.flyTo({center: holo.geometry.coordinates});
-            var path = '/sensors/'+holo.properties.id + '.html';
-
             var defaultMarkerOptions = {
                 color: '#FB4D42'
             }
@@ -324,8 +329,11 @@
                     $('.slider').toggleClass('close', infoClosed);
                     infoClosed = false;
 
-                    $("#searchInfo").load(path + " .content-container");
-
+                    $.ajax({
+                        url:"/sensor_info",
+                        type: "GET",
+                        data: {si: holo.properties.sensor_id}
+                    });
                 },
                 error:function(){
                     alert('Error');
@@ -417,9 +425,12 @@
                     return;
                 }
                 if(geocoder._typeahead.selected.place_type == "sensor"){
-                    var path = '/sensors/'+ geocoder._typeahead.selected.properties.id + '.html';
-
-                    $("#searchInfo").load(path + " .content-container");
+        
+                    $.ajax({
+                        url:"/sensor_info",
+                        type: "GET",
+                        data: {si: geocoder._typeahead.selected.properties.sensor_id}
+                    });
                 
                 }else{
                     $('#searchInfo').html(

@@ -62,6 +62,10 @@ class SensorsController < ApplicationController
     end
   end
 
+  def sensor_info
+    @sensor = Sensor.find_by(sensor_id:params[:si].to_s)
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sensor
