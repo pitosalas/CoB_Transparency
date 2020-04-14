@@ -430,8 +430,8 @@
                 
                 }else{
                     $('#searchInfo').html(
-                        "<p>" + geocoder._typeahead.selected.place_name + "<p>" +
-                        "<p>" + geocoder._typeahead.selected.center.toString() + "<p>"
+                        "<div class='area-name'>" + geocoder._typeahead.selected.place_name + "</div>" +
+                        "<div class='area-longlat'>" + geocoder._typeahead.selected.center.toString() + "</div>"
                     )
                 }
             }
