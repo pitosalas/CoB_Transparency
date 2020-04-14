@@ -1,6 +1,6 @@
 $('#searchInfo').html(
     '<div class = "id_info">' + 
-        '"' + 'Sensor ' + '<%= j @sensor.sensor_id %>' + '"' +
+        'Sensor ' + '<%= j @sensor.sensor_id %>' +
     '</div>'
 );
 $('#searchInfo').append(
@@ -13,23 +13,26 @@ $('#searchInfo').append(
         '<%= j @sensor.location %>' +
     '</div>'
 );
+$('#searchInfo').append(
+    '<div class = "description-box"></div>'
+)
 <% if @sensor.owner != nil %>
-    $('#searchInfo').append(
+    $('.description-box').append(
         '<div class = "owner_info">' +
             '<%= j @sensor.owner%>' +
         '</div>'
     );
 <% else %>
-    $('#searchInfo').append(
+    $('.description-box').append(
         '<div class = "owner_info">' +
             'Owner: ' + 'Owner not specified.' +
         '</div>'
     );
 <% end %>
 <% if @sensor.description != nil %>
-    $('#searchInfo').append(
+    $('.description-box').append(
         '<div class = "description_info">' +
-            '<%= j @sensor.description %>' +
+            'Comment: ' + '"' +'<%= j @sensor.description %>' + '"' +
         '</div>'
     );
 <% end %>
