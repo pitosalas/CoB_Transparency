@@ -23,12 +23,57 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
+  # config.main_app_name = ["Cool app", "BackOffice"]
+  # or something more dynamic
+  # config.main_app_name = Proc.new { |controller| [ "Cool app", "BackOffice - #{controller.params[:action].try(:titleize)}" ] }
+
   # REQUIRED:
   # Include the import action
   # See https://github.com/sferik/rails_admin/wiki/Actions
   config.actions do
-    all
+    # root actions
+    dashboard                     # mandatory
+    # collection actions 
+    index                         # mandatory
+    new
+    export
+    #history_index
+    bulk_delete
+    # member actions
+    show
+    edit
+    delete
     import
+  end
+
+  # configure fields
+  config.model 'Sensor' do
+    list do
+      field :sensor_id do
+        label "Sensor ID"
+      end
+      field :sensor_type do
+        label "Sensor Type"
+      end
+      field :owner do
+        label "Owner"
+      end
+      field :description do
+        label "Description"
+      end
+      field :location do
+        label "Location"
+      end
+      field :longitude do
+        label "Longitude"
+      end
+      field :latitude do
+        label "Latitude"
+      end
+      configure :street do
+        hide
+      end
+    end
   end
 
   # Optional:

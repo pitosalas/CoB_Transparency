@@ -1,8 +1,8 @@
 class Sensor < ActiveRecord::Base 
   include ActiveModel::Validations::Callbacks
-  # belongs_to :study_area, optional: true
-  # has_one :point, primary_key: :sensor_id, foreign_key: :identifier
 
+
+  
   # VALID_LOCATION_REGEX = /\A^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$\z/
   # validates :location, presence: true, 
   #           length: {maximum: 50}, 
