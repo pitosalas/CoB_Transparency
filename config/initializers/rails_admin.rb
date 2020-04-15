@@ -27,6 +27,18 @@ RailsAdmin.config do |config|
   # or something more dynamic
   # config.main_app_name = Proc.new { |controller| [ "Cool app", "BackOffice - #{controller.params[:action].try(:titleize)}" ] }
 
+  # More at https://github.com/sferik/rails_admin/wiki/Horizontally-scrolling-table-with-frozen-columns-in-list-view
+  # Use default horizontal scroll settings of 3 frozen columns (checkboxes, links/actions, ID) with a border on the right:
+  config.sidescroll = true
+
+  # Turn off horizontal scrolling for a specific model:
+  # config.model 'Feedback' do
+  #   list do
+  #     sidescroll false
+  #   end
+  # end
+
+
   # REQUIRED:
   # Include the import action
   # See https://github.com/sferik/rails_admin/wiki/Actions
@@ -71,6 +83,26 @@ RailsAdmin.config do |config|
         label "Latitude"
       end
       configure :street do
+        hide
+      end
+    end
+  end
+
+  config.model "Administrator" do
+    list do
+      configure :password_digest do
+        hide
+      end
+      configure :remember_digest do
+        hide
+      end
+      configure :activation_digest do
+        hide
+      end
+      configure :reset_digest do
+        hide
+      end
+      configure :reset_sent_at do
         hide
       end
     end
