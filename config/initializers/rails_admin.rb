@@ -9,7 +9,8 @@ RailsAdmin.config do |config|
   # config.current_user_method(&:current_user)
 
   ## == CancanCan ==
-  # config.authorize_with :cancancan
+  config.authorize_with :cancancan
+  # config.current_user_method { current_user } # refers to the current_user helper method in my case
 
   ## == Pundit ==
   # config.authorize_with :pundit
@@ -38,6 +39,8 @@ RailsAdmin.config do |config|
   #   end
   # end
 
+  config.parent_controller = "::ApplicationController"
+  config.current_user_method { current_user }
 
   # REQUIRED:
   # Include the import action
