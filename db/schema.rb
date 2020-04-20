@@ -38,20 +38,8 @@ ActiveRecord::Schema.define(version: 2020_04_16_002352) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "points", force: :cascade do |t|
-    t.integer "point_id"
-    t.string "point_type"
-    t.integer "identifier"
-    t.string "longitude"
-    t.string "latitude"
-    t.string "location"
-    t.integer "ordering"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "sensors", force: :cascade do |t|
-    t.integer "sensor_id"
+    t.string "sensor_id"
     t.string "sensor_type"
     t.string "owner"
     t.string "description"
@@ -62,15 +50,6 @@ ActiveRecord::Schema.define(version: 2020_04_16_002352) do
     t.float "latitude"
     t.string "street"
     t.boolean "hidden"
-  end
-
-  create_table "study_areas", force: :cascade do |t|
-    t.integer "study_area_id"
-    t.string "name"
-    t.integer "sensor_count"
-    t.integer "point_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
