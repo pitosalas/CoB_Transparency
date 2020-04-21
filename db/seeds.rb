@@ -38,7 +38,7 @@ Administrator.create!(name: 'Admin',
   activated_at: Time.zone.now)
 
 sensors = []
-sensor_columns = [:sensor_id, :sensor_type, :owner, :description, :longitude, :latitude, :location]
+sensor_columns = [:sensor_id, :sensor_type, :owner, :description, :longitude, :latitude, :location, :hidden]
 sensor_csv_path = "./db/sensors.csv"
 # sensor_csv_path = "https://docs.google.com/spreadsheets/d/1I0PSo4PdN-8wFFn1vcPod5JvlXPhhZhyePiRVPIcHzI/gviz/tq?tqx=out:csv&sheet=sensors"
 #CSV.parse(open(sensor_csv_path), :headers=>true).each do |row|
@@ -51,7 +51,8 @@ CSV.read(sensor_csv_path, :headers=>true).each do |row|
     description: row["description"],
     longitude: row["longitude"],
     latitude: row["latitude"].to_f,
-    location: row["location"])
+    location: row["location"],
+    hidden: false)
 end
 
 Sensor.import sensor_columns, sensors
