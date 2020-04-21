@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 #   alias_method :current_user, :current_administrator
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to main_app.root_path
+    redirect_to main_app.login_path
   end
   helper_method :current_user 
   @first_open = true
