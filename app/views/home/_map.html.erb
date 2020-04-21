@@ -68,7 +68,10 @@
         maxBounds: [[-71.194540,42.216314],[-70.920614,42.409770]]
     });
 
-    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    map.addControl(new mapboxgl.NavigationControl({
+        showCompass: false
+    }), 'top-right');
+
     map.on('style.load', function() {
         if(map.getSource("sensor_loc") == undefined){
             map.addSource('sensor_loc', {
@@ -294,6 +297,8 @@
         })      
     });
 
+    map.dragRotate.disable();
+    map.touchZoomRotate.disableRotation();
 
     map.on('mouseenter', 'neighborhood_fill', function() {
         map.getCanvas().style.cursor = 'pointer';
@@ -407,8 +412,11 @@
             }
         })
     );
-
+    
+   
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+    
 
     
 

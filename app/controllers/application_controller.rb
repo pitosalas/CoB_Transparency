@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 #   alias_method :current_user, :current_administrator
 
   helper_method :current_user 
-
+  @first_open = true
   private
  
   def current_user
