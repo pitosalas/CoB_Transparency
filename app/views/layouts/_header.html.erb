@@ -15,14 +15,16 @@
       <%= link_to image_tag("COB_B_white.png", height: '30'), root_path, id: "logo" %>
       <%= link_to "Transparency", root_path, id: "logo" %>
     </div>
-
+    <div class = "info-container">
+      <%= link_to image_tag("info.png", class: "info-tag", alt: "Info logo", width: "20"), about_path %> 
+    </div>
     <div class = "hamburger">
       <%= image_tag("hamburger-bar.svg", size: "20x20", class:"hamburger-icon") %>
     </div>
 
     <div class = "cob-navbar">
       <div class = "cob-navbar-list">
-        <%= link_to image_tag("info.png", class: "info-tag", alt: "Info logo", width: "20"), about_path %> 
+        <%= link_to "About us", about_path, class: "navbar-link"%>
       </div>
         
       <% if logged_in? %>

@@ -707,7 +707,11 @@ svg:not(:root) {
   background-color: transparent;
   cursor: pointer;
 }
-
+.info-container{
+  position: fixed;
+  right: 60px;
+  top: 13px;
+}
 .nav-background {
   position: fixed;
   background-color: #222;
