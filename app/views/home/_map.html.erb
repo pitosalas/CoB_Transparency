@@ -7,7 +7,9 @@
 
 <div class = "toggleSwitch">
     <nav id="filter-group" class="filter-group" id="toggle-buttons"></nav>
-    <div class = "filter-group-toggle"></div>
+    <div class = "filter-group-toggle">
+        <%= image_tag("arrow.svg", class:"arrow") %>
+    </div>
 </div>
 
 <div class = "view-change">
@@ -28,7 +30,12 @@
     
     <p></p>
 
+    <div class = "feedback-label">
+        Report Issues
+    </div>
+
     <div class = "container">
+        
         <div class = "feedback-area">
         <%= render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>
         </div>
@@ -40,7 +47,8 @@
 <script data-no-turbolink="true">
     
     $(".filter-group-toggle").click(function(){
-        $(".toggleSwitch").toggleClass("close");      
+        $(".toggleSwitch").toggleClass("folded"); 
+        $(".arrow").toggleClass("folded");     
     });
 
     mapboxgl.accessToken = 'pk.eyJ1Ijoibm9zc3UzNzUxIiwiYSI6ImNrNzRxbHo3bzA4MW4zZm8zdmxpZ294MzEifQ.HcBzxOgPOrQHFhplZ0FuXQ';
@@ -282,14 +290,16 @@
                 $('.slider').toggleClass('close', infoClosed);
                 infoClosed = false;
                 sensors_inside = neighborhood_sensors[holo.properties.Name];
+                $('#searchInfo').attr('name',holo.properties.Name);
+                $('#feedback_topic').val("Neighborhood - " + holo.properties.Name);
                 if(sensors_inside[1].length != 0){
                     $('#searchInfo').html(                              
-                        "<p><h1>" + holo.properties.Name + "</h1></p>" +
+                        "<div class = 'id_info'>" + holo.properties.Name + "</div>" +
                         neighborhood_sensors[holo.properties.Name][0]
                     );
                 }else{
                     $('#searchInfo').html(                              
-                        "<p><h1>" + holo.properties.Name + "</h1></p>" +
+                        "<div class = 'id_info'>" + holo.properties.Name + "</div>" +
                         "<p> Sorry! We don't have any sensors here yet. </p>"
                     );
                 }           
@@ -363,8 +373,7 @@
                     $('.feedback-area').html("<%= j render partial: 'feedbacks/form', locals: {feedback: Feedback.new}  %>")
                 }
             }
-        })
-        
+        })     
     });
 
     $('#expandthis').click(function(){
@@ -383,6 +392,8 @@
         style_index = (style_index == 0)?1:0;
         map.setStyle(map_style[style_index]);
     });
+    
+    
 
     var forwardGeocoder =(query)=> {
         var matchingFeatures = [];

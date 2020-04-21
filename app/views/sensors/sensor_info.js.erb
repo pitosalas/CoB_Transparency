@@ -1,3 +1,5 @@
+$('#searchInfo').attr('name', <%= j @sensor.sensor_id %>);
+$('#feedback_topic').val('Sensor - ' + <%= j @sensor.sensor_id %>);
 $('#searchInfo').html(
     '<div class = "id_info">' + 
         'Sensor ' + '<%= j @sensor.sensor_id %>' +

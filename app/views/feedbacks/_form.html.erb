@@ -11,10 +11,11 @@
       </ul>
     </div>
   <% end %>
+  
 
   <div class="field">
-    <%= form.label :"Report Issues" %>
-    <%= form.text_area :issue, class: "form-control", rows:"6", cols:"40" %>
+    <%= form.text_field :topic, class: "topic", value: "general" %>
+    <%= form.text_area :issue, class: "form-control", placeholder: "Please report any issues.", rows:"6", cols:"40" %>
   </div>
 
   </textarea>

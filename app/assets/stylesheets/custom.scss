@@ -697,6 +697,7 @@ svg:not(:root) {
   left: 12px;
   height: 40px;
   background-color: #222;
+  z-index: 20px;
 
 }
 .hamburger{
@@ -710,6 +711,13 @@ svg:not(:root) {
   cursor: pointer;
 }
 
+.nav-background{
+  position:fixed;
+  background-color: #222;
+  height: 50px;
+  width: 100%;
+  z-index: -1;
+}
 
 .hamburger-icon{
   width: 40px;
