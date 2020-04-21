@@ -27,10 +27,10 @@
         
       <% if logged_in? %>
         <div class = "cob-navbar-list">
-          <%= link_to "Administrators", '/admin' %>
+          <%= link_to "Administrators", '/admin', class: "navbar-link"%>
         </div>
         <div class = "cob-navbar-list">
-          <%= link_to "Log out", logout_path, method: :delete %> 
+          <%= link_to "Log out", logout_path, method: :delete, class: "navbar-link" %> 
         </div>
       <% else %>
         <div class = "cob-navbar-list">

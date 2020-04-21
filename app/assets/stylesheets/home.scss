@@ -4,11 +4,11 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-.custom-icons{
+.custom-icons {
   padding-top: 4px;
 }
 
-.view-change{
+.view-change {
   position: fixed;
   width: 29px;
   height: 29px;
@@ -43,7 +43,7 @@
   pointer-events: none;
   .rounded-box {
     position: absolute;
-    pointer-events:auto;
+    pointer-events: auto;
     border-radius: 25px 25px 0 0;
     top: 50px;
     padding: 2%;
@@ -52,16 +52,16 @@
     left: 0%;
     background-color: rgba(250, 250, 250, 0.7);
     box-shadow: 0px -1.5px 10px rgba(0, 0, 0, 0.15);
-    backdrop-filter:blur(3px);
-    -webkit-backdrop-filter:blur(3px);
-    @media screen and (max-width: 10000px){
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    @media screen and (max-width: 10000px) {
       #searchInfo {
         position: relative;
         height: 50%;
         max-width: 1110px;
         margin-left: auto;
         margin-right: auto;
-        margin-top:3%;
+        margin-top: 3%;
         padding-left: 10px;
         padding-right: 10px;
         overflow-y: scroll;
@@ -69,22 +69,22 @@
         line-height: 1.6em;
         border-radius: 10px;
         border: 1px solid #ccc;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        background-color:transparent;
-        backdrop-filter:blur(1px);
-      -webkit-backdrop-filter:blur(1px);
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        background-color: transparent;
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
       }
     }
 
-    @media screen and (max-width: 1200px){
+    @media screen and (max-width: 1200px) {
       #searchInfo {
         position: relative;
         height: 50%;
         max-width: 910px;
         margin-left: auto;
         margin-right: auto;
-        margin-top:3%;
+        margin-top: 3%;
         padding-left: 10px;
         padding-right: 10px;
         overflow-y: scroll;
@@ -92,45 +92,22 @@
         line-height: 1.6em;
         border-radius: 10px;
         border: 1px solid #ccc;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        background-color:transparent;
-        backdrop-filter:blur(1px);
-        -webkit-backdrop-filter:blur(1px);
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        background-color: transparent;
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
       }
     }
-    
-    @media screen and (max-width: 992px){
+
+    @media screen and (max-width: 992px) {
       #searchInfo {
         position: relative;
         height: 50%;
         max-width: 690px;
         margin-left: auto;
         margin-right: auto;
-        margin-top:3%;
-        padding-left: 10px;
-        padding-right: 10px;     
-        overflow-y: scroll;
-        overflow-x: hidden;
-        line-height: 1.6em;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        background-color:transparent;
-        backdrop-filter:blur(1px);
-    -webkit-backdrop-filter:blur(1px);
-      }
-    }
-
-    @media screen and (max-width: 768px){
-      #searchInfo {
-        position: relative;
-        height: 50%;
-        max-width: 85%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top:5%;
+        margin-top: 3%;
         padding-left: 10px;
         padding-right: 10px;
         overflow-y: scroll;
@@ -138,15 +115,37 @@
         line-height: 1.6em;
         border-radius: 10px;
         border: 1px solid #ccc;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        background-color:transparent;
-        backdrop-filter:blur(1px);
-      -webkit-backdrop-filter:blur(1px);
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        background-color: transparent;
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
       }
     }
-    
-   
+
+    @media screen and (max-width: 768px) {
+      #searchInfo {
+        position: relative;
+        height: 50%;
+        max-width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%;
+        padding-left: 10px;
+        padding-right: 10px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        line-height: 1.6em;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        background-color: transparent;
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
+      }
+    }
+
     // .feedback-area{
     //     position: absolute;
     //     width: 100%;
@@ -202,8 +201,6 @@
   cursor: pointer;
 }
 
-
-
 .toggleSwitch {
   position: absolute;
   width: 29px;
@@ -244,20 +241,20 @@
   color: #fff;
 }
 
-.toggle_icon{
+.toggle_icon {
   position: relative;
-  margin-top:7px;
+  margin-top: 7px;
   z-index: 2;
   bottom: 10px;
   width: 29px;
   height: 29px;
   border-radius: 4px;
   background-color: #fff;
-  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
-.arrow{
+.arrow {
   // position: absolute;
   width: 15px;
   height: 15px;
@@ -266,26 +263,24 @@
   transition: all 0.5s;
 }
 
-.arrow.folded{
+.arrow.folded {
   transform: rotate(0deg);
 }
 
-
-.toggle_icon.clicked{
+.toggle_icon.clicked {
   box-shadow: 0 0 0px 2px rgba(42, 166, 255, 0.5);
   background-color: rgb(188, 227, 243);
 }
 
-.toggle_icon_img{
+.toggle_icon_img {
   width: 25px;
   height: 25px;
   padding-top: 3px;
 }
 
-
 .filter-group input[type="checkbox"] {
-   display: none;
- }
+  display: none;
+}
 
 .filter-group input[type="checkbox"] + label {
   display: block;
@@ -312,17 +307,15 @@
 
 //data loaded onto infobar
 
-.show-page{
+.show-page {
   pointer-events: none;
 }
 
-.container{
-  pointer-events:auto;
+.container {
+  pointer-events: auto;
 }
 
 // mapbox geocoder
-
-
 
 .mapboxgl-ctrl-geocoder,
 .mapboxgl-ctrl-geocoder *,
@@ -526,137 +519,136 @@ hr {
 }
 
 a:visited {
-  color: transparent;
+  color: white;
 }
 
 @font-face {
-	font-family: 'Montserrat-Bold';
-	src:url(asset-path('fonts/Montserrat-Bold.eot'));
-	src:url('fonts/Montserrat-Bold?#iefix') format('embedded-opentype'),
-		url('fonts/Montserrat-Bold.ttf') format('truetype'),
-		url('fonts/Montserrat-Bold.woff') format('woff'),
-		url('fonts/Montserrat-Bold.svg#icofonts') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}	
+  font-family: "Montserrat-Bold";
+  src: url(asset-path("fonts/Montserrat-Bold.eot"));
+  src: url("fonts/Montserrat-Bold?#iefix") format("embedded-opentype"),
+    url("fonts/Montserrat-Bold.ttf") format("truetype"),
+    url("fonts/Montserrat-Bold.woff") format("woff"),
+    url("fonts/Montserrat-Bold.svg#icofonts") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
-	font-family: 'Montserrat-SemiBold';
-	src:url(asset-path('fonts/Montserrat-SemiBold.eot'));
-	src:url('fonts/Montserrat-SemiBold?#iefix') format('embedded-opentype'),
-		url('fonts/Montserrat-SemiBold.ttf') format('truetype'),
-		url('fonts/Montserrat-SemiBold.woff') format('woff'),
-		url('fonts/Montserrat-SemiBold.svg#icofonts') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}	
+  font-family: "Montserrat-SemiBold";
+  src: url(asset-path("fonts/Montserrat-SemiBold.eot"));
+  src: url("fonts/Montserrat-SemiBold?#iefix") format("embedded-opentype"),
+    url("fonts/Montserrat-SemiBold.ttf") format("truetype"),
+    url("fonts/Montserrat-SemiBold.woff") format("woff"),
+    url("fonts/Montserrat-SemiBold.svg#icofonts") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
-	font-family: 'Montserrat-SemiBoldItalic';
-	src:url(asset-path('fonts/Montserrat-SemiBoldItalic.eot'));
-	src:url('fonts/Montserrat-SemiBoldItalic?#iefix') format('embedded-opentype'),
-		url('fonts/Montserrat-SemiBoldItalic.ttf') format('truetype'),
-		url('fonts/Montserrat-SemiBoldItalic.woff') format('woff'),
-		url('fonts/Montserrat-SemiBoldItalic.svg#icofonts') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}	
+  font-family: "Montserrat-SemiBoldItalic";
+  src: url(asset-path("fonts/Montserrat-SemiBoldItalic.eot"));
+  src: url("fonts/Montserrat-SemiBoldItalic?#iefix") format("embedded-opentype"),
+    url("fonts/Montserrat-SemiBoldItalic.ttf") format("truetype"),
+    url("fonts/Montserrat-SemiBoldItalic.woff") format("woff"),
+    url("fonts/Montserrat-SemiBoldItalic.svg#icofonts") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
-	font-family: 'Montserrat-LightItalic';
-	src:url(asset-path('fonts/Montserrat-LightItalic.eot'));
-	src:url('fonts/Montserrat-LightItalic?#iefix') format('embedded-opentype'),
-		url('fonts/Montserrat-LightItalic.ttf') format('truetype'),
-		url('fonts/Montserrat-LightItalic.woff') format('woff'),
-		url('fonts/Montserrat-LightItalic.svg#icofonts') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}	
+  font-family: "Montserrat-LightItalic";
+  src: url(asset-path("fonts/Montserrat-LightItalic.eot"));
+  src: url("fonts/Montserrat-LightItalic?#iefix") format("embedded-opentype"),
+    url("fonts/Montserrat-LightItalic.ttf") format("truetype"),
+    url("fonts/Montserrat-LightItalic.woff") format("woff"),
+    url("fonts/Montserrat-LightItalic.svg#icofonts") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
-	font-family: 'Montserrat-Light';
-	src:url(asset-path('fonts/Montserrat-Light.eot'));
-	src:url('fonts/Montserrat-Light?#iefix') format('embedded-opentype'),
-		url('fonts/Montserrat-Light.ttf') format('truetype'),
-		url('fonts/Montserrat-Light.woff') format('woff'),
-		url('fonts/Montserrat-Light.svg#icofonts') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}	
+  font-family: "Montserrat-Light";
+  src: url(asset-path("fonts/Montserrat-Light.eot"));
+  src: url("fonts/Montserrat-Light?#iefix") format("embedded-opentype"),
+    url("fonts/Montserrat-Light.ttf") format("truetype"),
+    url("fonts/Montserrat-Light.woff") format("woff"),
+    url("fonts/Montserrat-Light.svg#icofonts") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
-	font-family: 'Lora-Regular';
-	src:url(asset-path('fonts/Lora-Regular.eot'));
-	src:url('fonts/Lora-Regular?#iefix') format('embedded-opentype'),
-		url('fonts/Lora-Regular.ttf') format('truetype'),
-		url('fonts/Lora-Regular.woff') format('woff'),
-		url('fonts/Lora-Regular.svg#icofonts') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}	
+  font-family: "Lora-Regular";
+  src: url(asset-path("fonts/Lora-Regular.eot"));
+  src: url("fonts/Lora-Regular?#iefix") format("embedded-opentype"),
+    url("fonts/Lora-Regular.ttf") format("truetype"),
+    url("fonts/Lora-Regular.woff") format("woff"),
+    url("fonts/Lora-Regular.svg#icofonts") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 
-.id_info{
+.id_info {
   padding-top: 20px;
   font-size: xx-large;
   line-height: 1.6em;
   text-align: center;
   padding-left: 10px;
   padding-right: 10px;
-  font-family: 'Montserrat-Bold'; 
+  font-family: "Montserrat-Bold";
 }
 
-.type_info{
+.type_info {
   line-height: 1.6em;
   font-size: x-large;
   text-align: center;
   padding-left: 10px;
   padding-right: 10px;
-  font-family: 'Montserrat-SemiBold'; 
+  font-family: "Montserrat-SemiBold";
 }
 
-.feedback-label{
+.feedback-label {
   line-height: 1.6em;
   font-size: small;
   text-align: center;
-  font-family: 'Montserrat-Light'; 
+  font-family: "Montserrat-Light";
   margin-top: 20px;
   margin-bottom: 5px;
 }
 
-#feedback_topic{
+#feedback_topic {
   display: none;
 }
 
-
-.location_info{
+.location_info {
   padding: 10px;
   margin-top: 10px;
   line-height: 1.6em;
   font-size: small;
   text-align: justify;
-  font-family:'Montserrat-LightItalic'
+  font-family: "Montserrat-LightItalic";
 }
 
-@media screen and (min-width: 768px){
-  .location_info{
+@media screen and (min-width: 768px) {
+  .location_info {
     padding: 10px;
     margin-top: 10px;
     line-height: 1.6em;
     font-size: small;
     text-align: center;
-    font-family:'Montserrat-LightItalic'
+    font-family: "Montserrat-LightItalic";
   }
 }
 
-.description-box{
+.description-box {
   border-radius: 10px;
   border: 1px dashed #ccc;
   margin-bottom: 10px;
-  font-family: Lora-Regular; 
+  font-family: Lora-Regular;
   margin-top: 20px;
 }
 
-.owner_info{
+.owner_info {
   line-height: 1.6em;
   font-size: medium;
   text-align: left;
@@ -664,22 +656,21 @@ a:visited {
   border-bottom: 1px dashed #ccc;
 }
 
-.description_info{
-  padding:10px;
+.description_info {
+  padding: 10px;
   line-height: 1.6em;
   font-size: medium;
   background-color: transparent;
   text-align: left;
-  
 }
 
-.area-name{
-  padding:10px;
-  font-family: 'Montserrat-SemiBold'; 
+.area-name {
+  padding: 10px;
+  font-family: "Montserrat-SemiBold";
   border-bottom: 1px dashed #ccc;
 }
 
-.area-longlat{
-  padding:10px;
-  font-family: 'Montserrat-LightItalic';
+.area-longlat {
+  padding: 10px;
+  font-family: "Montserrat-LightItalic";
 }
