@@ -15,9 +15,36 @@
       <%= link_to image_tag("COB_B_white.png", height: '30'), root_path, id: "logo" %>
       <%= link_to "Transparency", root_path, id: "logo" %>
     </div>
-    <div class = "info-container">
-      <%= link_to image_tag("info.png", class: "info-tag", alt: "Info logo", width: "20"), about_path %> 
+       
+    <button id = "infoBtn"> 
+      <%= image_tag "info.png", size:"25x25"%>
+    </button>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>How to use the app...</p>
     </div>
+  </div>
+
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("infoBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
     <div class = "hamburger">
       <%= image_tag("hamburger-bar.svg", size: "20x20", class:"hamburger-icon") %>
     </div>
