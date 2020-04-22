@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'password_resets/new'
   get 'password_resets/edit'
   resources :feedbacks
+  get 'new_feedback' => 'feedbacks#new'
   get 'sessions/new'
   get 'administrators/new'
   root 'administrator_pages#home'
