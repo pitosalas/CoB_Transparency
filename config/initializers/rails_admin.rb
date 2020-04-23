@@ -30,7 +30,7 @@ RailsAdmin.config do |config|
 
   # More at https://github.com/sferik/rails_admin/wiki/Horizontally-scrolling-table-with-frozen-columns-in-list-view
   # Use default horizontal scroll settings of 3 frozen columns (checkboxes, links/actions, ID) with a border on the right:
-  config.sidescroll = true
+  config.sidescroll = {num_frozen_columns: 2}
 
   # Turn off horizontal scrolling for a specific model:
   # config.model 'Feedback' do
@@ -63,10 +63,13 @@ RailsAdmin.config do |config|
 
   # configure fields
   config.model 'Sensor' do
+    configure :street do
+      hide
+    end
     list do
-      field :sensor_id do
-        label "Sensor ID"
-      end
+      # field :sensor_id do
+      #   label "Sensor ID"
+      # end
       field :sensor_type do
         label "Sensor Type"
       end
@@ -92,6 +95,18 @@ RailsAdmin.config do |config|
   end
 
   config.model "Administrator" do
+    configure :password_digest do
+      hide
+    end
+    configure :remember_digest do
+      hide
+    end
+    configure :activation_digest do
+      hide
+    end
+    configure :reset_digest do
+      hide
+    end
     list do
       configure :password_digest do
         hide

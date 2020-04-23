@@ -10,7 +10,7 @@ json.features @sensors.each do |sensor|
         end
         json.set! :properties do
             json.set! :id, sensor.id
-            json.set! :sensor_id, sensor.sensor_id 
+            json.set! :sensor_id, sensor.id 
             json.set! :sensor_type, sensor.sensor_type
             json.set! :ownership, sensor.owner
             json.set! :description, sensor.description
