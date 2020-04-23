@@ -22,7 +22,7 @@ class Sensor < ActiveRecord::Base
   #   geocoded_by :address
   #   after_validation :geocode
   # else
-    reverse_geocoded_by :latitude, :longitude, :address => :location
-    after_validation :reverse_geocode 
+  reverse_geocoded_by :latitude, :longitude, :address => :location
+  after_validation :reverse_geocode 
   
 end
