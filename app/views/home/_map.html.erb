@@ -65,6 +65,7 @@
         'mapbox://styles/nossu3751/ck757utxk36gn1io7vjmmmrnh',
         'mapbox://styles/nossu3751/ck8l8v9010hj41jo06o6r9673'
     ];
+    
         
     var map = new mapboxgl.Map({
         container: 'map',
@@ -230,17 +231,25 @@
         };
 
         neighborhood_sensors = {};
-        
+        sensor_table_rows = [];
         neighborhood.features.forEach(function(e){
             name = e.properties.Name;
             n_sensors = [];
-            content = "<table style='width:100%'><tr><th style='text-align:center'>Sensor ID</th><th style='text-align:center'>Sensor Type</th></tr>";
+            content = "<div class = 'neighborhood-sensor-list'>" +
+                "<table style='width:100%'>" +
+                    "<tr>" +
+                        "<th style='text-align:center'>Sensor ID</th>" +
+                        "<th style='text-align:center'>Sensor Type</th>" +
+                    "</tr>";
             sen.features.forEach(function(s){
                 if(turf.inside(s,e)){
-                    n_sensors.push(s.properties.sensor_id);
-                    content += "<tr><td>" +  s.properties.sensor_id + "</td><td>" + s.properties.sensor_type + "</td></tr>"
+                    n_sensors.push(s.properties.id);
+                    content += "<tr>" + "<td>" +  s.properties.id + "</td><td>" + s.properties.sensor_type + "</td></tr>"
                 }
+                sensor_table_rows.push("table-"+s.properties.id);
             });
+            content += "</table></div>";
+            
             neighborhood_sensors[name] = [content, n_sensors];
         });
 
@@ -340,7 +349,7 @@
                     $.ajax({
                         url:"/sensor_info",
                         type: "GET",
-                        data: {si: holo.properties.sensor_id}
+                        data: {si: holo.properties.id}
                     });
                 },
                 error:function(){
@@ -399,8 +408,8 @@
         var matchingFeatures = [];
         for (var i = 0; i < sen.features.length; i++){
             var feature = sen.features[i];
-            if(feature.properties.sensor_id.toString().toLowerCase().search(query.toLowerCase()) !== -1){
-                feature['place_name'] = '📷 sensor ' + feature.properties.sensor_id;
+            if(feature.properties.id.toString().toLowerCase().search(query.toLowerCase()) !== -1){
+                feature['place_name'] = '📷 sensor ' + feature.properties.id;
                 feature['center'] = feature.geometry.coordinates;
                 feature['place_type'] = ['sensor'];
                 matchingFeatures.push(feature);
@@ -427,10 +436,6 @@
    
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
-    
-
-    
-
     geocoder._inputEl.addEventListener('change',function(){
         $.ajax({
             success: function(){
@@ -445,7 +450,7 @@
                     $.ajax({
                         url:"/sensor_info",
                         type: "GET",
-                        data: {si: geocoder._typeahead.selected.properties.sensor_id}
+                        data: {si: geocoder._typeahead.selected.properties.id}
                     });
                 
                 }else{

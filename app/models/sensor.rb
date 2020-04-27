@@ -15,13 +15,22 @@ class Sensor < ActiveRecord::Base
   # validates :sensor_type, 
   #           inclusion: { in: sensor_types}
   def address
-    [street, "Boston", "Massachusetts", "United States"].compact.join(', ')
+    if location != nil 
+      location
+    elsif street != nil
+      [street, "Boston", "Massachusetts", "United States"].compact.join(', ')
+    else
+      nil
+    end
   end
 
+  geocoded_by :address
+  before_validation :geocode, if: ->(obj){obj.address.present?}
   # if(:street != nil)
   #   geocoded_by :address
   #   after_validation :geocode
   # else
+  # before_validation: :geocode, if: :
   reverse_geocoded_by :latitude, :longitude, :address => :location
   after_validation :reverse_geocode 
   

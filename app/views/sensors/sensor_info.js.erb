@@ -1,8 +1,8 @@
-$('#searchInfo').attr('name', <%= j @sensor.sensor_id %>);
-$('#feedback_topic').val('Sensor - ' + <%= j @sensor.sensor_id %>);
+$('#searchInfo').attr('name', <%= j @sensor.id %>);
+$('#feedback_topic').val('Sensor - ' + <%= j @sensor.id %>);
 $('#searchInfo').html(
     '<div class = "id_info">' + 
-        'Sensor ' + '<%= j @sensor.sensor_id %>' +
+        'Sensor ' + '<%= j @sensor.id %>' +
     '</div>'
 );
 $('#searchInfo').append(
@@ -35,6 +35,12 @@ $('#searchInfo').append(
     $('.description-box').append(
         '<div class = "description_info">' +
             'Comment: ' + '"' +'<%= j @sensor.description %>' + '"' +
+        '</div>'
+    );
+<% else %>
+    $('.description-box').append(
+        '<div class = "description_info">' +
+            'Comment: ' + 'No description specified.' + 
         '</div>'
     );
 <% end %>

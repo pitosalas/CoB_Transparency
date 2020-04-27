@@ -63,7 +63,7 @@ class SensorsController < ApplicationController
   end
 
   def sensor_info
-    @sensor = Sensor.find_by(sensor_id:params[:si].to_s)
+    @sensor = Sensor.find(params[:si])
   end
   
   private
