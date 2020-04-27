@@ -1,5 +1,5 @@
 class Sensor < ActiveRecord::Base 
-  include ActiveModel::Validations::Callbacks
+  # include ActiveModel::Validations::Callbacks
 
 
   
@@ -15,7 +15,9 @@ class Sensor < ActiveRecord::Base
   # validates :sensor_type, 
   #           inclusion: { in: sensor_types}
   def address
-    if location != nil 
+    if latitude != nil && longitude != nil
+      nil
+    elsif location != nil 
       location
     elsif street != nil
       [street, "Boston", "Massachusetts", "United States"].compact.join(', ')
