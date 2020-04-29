@@ -737,15 +737,15 @@ svg:not(:root) {
 
 /* The Close Button */
 .close-button {
-   color: #aaaaaa;
-   position: sticky;
-   float: right;
-   z-index: 10;
-   top: 1px;
-   right: 1px;
-   font-size: 28px;
-   font-weight: bold;
- }
+  color: #aaaaaa;
+  position: sticky;
+  float: right;
+  z-index: 10;
+  top: 1px;
+  right: 1px;
+  font-size: 28px;
+  font-weight: bold;
+}
 
 .close-button:hover,
 .close-button:focus {
@@ -753,14 +753,14 @@ svg:not(:root) {
   text-decoration: none;
   cursor: pointer;
 }
-.modal-content{
+.modal-content {
   position: fixed;
   height: 100% !important;
   top: -50px !important;
   bottom: -50px !important;
 }
-.modal-content::-webkit-scrollbar{
-  display:none;
+.modal-content::-webkit-scrollbar {
+  display: none;
 }
 
 #infoBtn {
@@ -859,7 +859,7 @@ ul {
 .instruction {
   text-align: left;
   margin: 0 auto;
-  width: 100%;
+  width: 45rem;
 }
 
 .instruction-img {
