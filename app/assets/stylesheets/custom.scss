@@ -736,19 +736,19 @@ svg:not(:root) {
 }
 
 /* The Close Button */
-.close {
-  color: #aaaaaa;
-  position: sticky;
-  // float: right;
-  z-index: 10;
-  top: 1px;
-  right: 1px;
-  font-size: 28px;
-  font-weight: bold;
-}
+.close-button {
+   color: #aaaaaa;
+   position: sticky;
+   float: right;
+   z-index: 10;
+   top: 1px;
+   right: 1px;
+   font-size: 28px;
+   font-weight: bold;
+ }
 
-.close:hover,
-.close:focus {
+.close-button:hover,
+.close-button:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
@@ -859,7 +859,7 @@ ul {
 .instruction {
   text-align: left;
   margin: 0 auto;
-  width: 45rem;
+  width: 100%;
 }
 
 .instruction-img {
