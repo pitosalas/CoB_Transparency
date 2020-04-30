@@ -27,7 +27,7 @@ class Sensor < ActiveRecord::Base
   end
 
   geocoded_by :address
-  before_validation :geocode, if: ->(obj){obj.address.present?}
+  before_validation :geocode, if: ->(obj){obj.address.present? && !(obj.latitude.present? && obj.longitude.present?}
   # if(:street != nil)
   #   geocoded_by :address
   #   after_validation :geocode
