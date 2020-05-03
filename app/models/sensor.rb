@@ -17,10 +17,10 @@ class Sensor < ActiveRecord::Base
   def address
     if latitude != nil && longitude != nil
       nil
-    elsif location != nil 
-      location
     elsif street != nil
       [street, "Boston", "Massachusetts", "United States"].compact.join(', ')
+    elsif location != nil 
+      location
     else
       nil
     end
@@ -33,6 +33,7 @@ class Sensor < ActiveRecord::Base
   #   after_validation :geocode
   # else
   # before_validation: :geocode, if: :
+  before_validation :reverse_geocode, if: ->(obj){!obj.location.present?}
   reverse_geocoded_by :latitude, :longitude, :address => :location
   after_validation :reverse_geocode 
   
