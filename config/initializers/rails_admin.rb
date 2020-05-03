@@ -133,6 +133,9 @@ RailsAdmin.config do |config|
   # Configure global RailsAdminImport options
   config.configure_with(:import) do |config|
     config.logging = true
+    # max number of items that can be imported at one time.
+    # config.line_item_limit = 1000
+    config.update_if_exists = true
   end
 
   # Optional:
