@@ -66,6 +66,9 @@ RailsAdmin.config do |config|
     configure :street do
       hide
     end
+    import do
+      mapping_key_list [:longitude, :latitude]
+    end
     list do
       # field :sensor_id do
       #   label "Sensor ID"
