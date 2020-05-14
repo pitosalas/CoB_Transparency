@@ -68,9 +68,13 @@ For the Feedback table, the issue is the content that the user reports to the ba
 |example|Camera is facing my window|sensor 2319|
 
 For the Sensor table, sensor_type is the type of sensor in the database, which for now includes antenna, air quality, camera, counter and other. Owner indicates who owns the sensor, i.e., City of Boston or 3rd party vendors. Description is an optional text to describe the sensor. Location is the full address where the sensor is located. Longitude and latitude are the geographic coordinates of the sensor. The hidden field decides if the sensor will show up in the app and is set to false by default. This is especially useful when some sensor is under maintenance but we still want to keep its information in the database. 
-||sensor_type|owner|description|location|longitude|latitude|hidden|
-|Data type|string|string|string|string|float|foat|boolean|
-|Example|camera|Verizon|a camera sensor|2 Oak st|-71.0657|42.34867|false|
+||sensor_type|owner|description|
+|Data type|string|string|string|
+|Example|camera|Verizon|a camera sensor|
+
+||location|longitude|latitude|hidden|
+|Data type|string|float|foat|boolean|
+|Example|2 Oak st|-71.0657|42.34867|false|
 
 ## Future Works
 Upon presenting the application to Nayeli and a few of her colleges that also work in the Boston government, the application received a very positive response. Many of the questions concerned the future of the application: possible additional functions that we could implement, and how the application would/could continue after the semester ends. Because of the current coronavirus situation, it would be impossible to implement this app into Boston and get it into the hands of citizens at this moment. However, the Boston team did seem to be extremely interested in deploying this application into the real world eventually, once there was an opportunity. 
